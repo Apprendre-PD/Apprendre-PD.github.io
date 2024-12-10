@@ -1,9 +1,9 @@
 body {
    background-image: url("image/istockphoto-1168680477-612x612.jpg");
-   background-size: cover; /* Make sure the image covers the entire background */
-   background-position: center; /* Center the background */
-   background-repeat: no-repeat; /* Prevent image repetition */
-   height: 100vh; /* Make sure body takes full height */
-   margin: 0; /* Remove default margin */
+   background-size: cover; 
+   background-position: center; 
+   background-repeat: no-repeat; 
+   height: 100vh;
+   margin: 0;
 }
 
