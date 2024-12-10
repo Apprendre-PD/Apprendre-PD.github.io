@@ -20,10 +20,14 @@
 
         const container = document.getElementById('image-container');
 
-      
+    function getRandomIntInclusive(1, 3) {
+  const minCeiled = Math.ceil(1);
+  const maxFloored = Math.floor(3);
+  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
        for (let i = 0; i < images.length; i++) {
             const img = document.createElement('img');
-            img.src = images[getRandomInt(3)];
+            img.src = images[getRandomIntInclusive(1, 3)];
             container.appendChild(img);
         }
             
