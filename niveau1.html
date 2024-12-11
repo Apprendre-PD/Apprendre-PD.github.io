@@ -3,37 +3,32 @@
     <head>
         <title>Apprendre-PD</title>
         <link rel="stylesheet" href="niveau1.css">
+        <script>
+        function getRandomImage() {
+            //declare an array to store images
+            var randomImage = new Array();
+            //0,1,2,3,4,5
+            randomImage[0] = "https://ci3.googleusercontent.com/mail-img-att/AGAZnRpQ0T6yLy0YjTJzLVvkI-6GSpuwUT1MDgx-PQTdTeapi2LFszE44Lq42-X5lljdUPlktvO6rMFZEMg6fZNo0ijmqs8nZyZeiQMPB4BWIAA59IdiDgXtxBNgCbqO_h8iJUDpuUuGCo7mUJ3bOjlMwkjLfqU-9dAW5MPBL4J2jizk2nini1od3YybvUKC4aFcYfVSFaylFpSA8wnswBj___FQ14gB8gS-AvXuMZWwluqXUWoDYDUKFxRjyQPXdyzuwbWBKfQ9s7n-I-2cuZn4jYioneXVOdqc7xXwHs_0nUp5LRj_RCiSHIvT0mqWqebZbK_Ohx_LPuzEUGDPQF8FMTTNk5OSmIQ4xaB7KbhwSVrRtHUTWKHBw7EB0SA_HUIQXMp3qDIoyPWiCpTSVkTB9O6fSOEwNzI7YbVNJQqQxwOuMaYEo64coT7x25TfQg5P2uVuKbqwIHl8TfFep6KWx3y24ho6H4fToum0OQn6R5kmouYFdoBfwcQR4XumZxUlvV5XUtkQ3PaBVyYj9YyOuE5Ura0TkW5A85sG1Z8rwiGPmp6bCKSelK1x7VjzUnTd4R-l74TaswMfF8e6ZdRhbGQ-W3henqYX5I0YtvV8Tk648RLTEFESTmFYqLxLi50zcqEXU1c3Y9QRDW3hU_3wMjwXJCLtSv-6NegfN8uozQnAmV0PWpHpCuvyoyAc-YAytJf3Pxt2yhR0VyGzcxVb3f2paPlTIJZLwEj2SyHm7h1kV4_oUvhheUgKNq9rE8ljE9OkzCUWFyWMGaABC-ItgJU-YGNe-qrdRQGxm8GSIEIQgtujtsGnfIcfT9AEsmrs-lCW0WbQzyhBmBfo2TPmssvd3TuUyuh-iFPjNsB6FPgqCgRzWskjy6OlNa7A61sWqxapEwRNwKsgW0T1U-tfHLy6KEoGS1dcxkKV8GeW4fQPVRlNiLS_Imr40UfFKaOoFuQrocliFTg2GCsCcnWmPw2r7WwuTmDUVaCI7uQLMw86BQa1kKnwn7-QHQ9L0Og4v8PdSAxx_2NSKj4PDcWeaxOmCg=s0-l75-ft";
+            randomImage[1] = "https://ci3.googleusercontent.com/mail-img-att/AGAZnRpva_1iQpv130uxdo_oS5ZsuLsToOjjKV7pPqc5GG3-HDsTyQ1m9k86QpzIATKPbn3fO19KizIQZpi-qrmKdTSsenkmOB7Iu4TokY1fYco9mT_BiN9Wn-ln9ZB7yFhXDk1Bjt4E4hVHJ-WcGwZJDe5xvU_f_ZBuPYZHEF4ho3AHr5Yo6uP5Cy5ZJBr1-jyi8cYzZlWlh5Xa1eEnm_JuRSpgohCPUuZx5x_ehDJT0KVLgu3T-QYcV2wsF2YOcg50XA7QxUBclVn8BTOcGzgw_RTEu6aK0Nfequ0VfAgc6122KQZJKlz4Z220GMcRcQnucrLE7xq8U9rGAhx6kBl2Ad8iCX3vWLHfbhQUCvu8ZuGkuqXh12ZhIu4Mh-2JvmyZl5ZNyBLVs9xokXU07Msvyt6QPBf1NFIT1oM41rzhLfjN6K2OYpO-7SNGjvBmSRAFraifeMA9GEwouroJhphSKLbbBYTvdSgsZ0yqVDuh1pMyjZbZP8kBSLEFg5z7ekQACcnWyjiZTckznAk9KQ-x3QCT8noKgGpJ_AYgfk_1JzMNC1hb-aryQlwuH3QRGdM-k3nVTAhamSqwSYH9tTHNdmXURSQZpHEjRvEMUAAgDn5nxs6DGL1yfRogNAMfkbrkrTAWm815nsg0ujDAkao-3J8eeEwFgB21uF-JIRY_rGU4p51QT1-6uplDvPnw26Uij-2ifbHdNBCulJGVTmIfeTuSjjJjDB4ay0L80UGdONkFswUQ8PdHBqssvWE2zGYx2ocmTZhYOtrzQnmNwSCmOZaKPj3700yZPO5UxoLVZTC7rlH2sGZMQFQQEc5OpR_0xzMYTPWKe3DlmLh2FZ857FElLwuJWXz5rdUCMAnqIr9d4-w5ZVNE_zdAlO168uvoA2EHgwowTyufgjz7ocGpNWgqXVOnCoXpsyYuiyVIqD0_4LV7V4yCoMHUjW_J2z5WB0Uh1bPSTkfr2lQQnlPAs7SSsIopO--m5aYUDj0VNRthn0kMOdur3BJXZjl-j8Hu_iZdNDBCElYLqVKwkjZQ3Q8odAHy=s0-l75-ft;
+            randomImage[2] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+            randomImage[3] = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+            randomImage[4] = "https://images.unsplash.com/photo-1501265976582-c1e1b0bbaf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+            randomImage[5] = "https://wi.wallpapertip.com/wsimgs/156-1565522_puppies-desktop-wallpaper-desktop-background-puppies.jpg";
+
+        // genrate a number and provide to genrate image accordingly
+        var number = Math.floor(Math.random()*randomImage.length); 
+         // return the images which are genrated
+         return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+        } 
+        </script>
     </head>
 
     <body>
-        
+
          <a href = "index.html"><img src ="https://cdn-icons-png.flaticon.com/512/25/25694.png"alt="home" width="30"/></a>
 
         <h1> Quiz 1</h1>
-            <div id="image-container"></div>
-    <script>
-        
-                 tbl.images = [[
-'https://ci3.googleusercontent.com/mail-img-att/AGAZnRpQ0T6yLy0YjTJzLVvkI-6GSpuwUT1MDgx-PQTdTeapi2LFszE44Lq42-X5lljdUPlktvO6rMFZEMg6fZNo0ijmqs8nZyZeiQMPB4BWIAA59IdiDgXtxBNgCbqO_h8iJUDpuUuGCo7mUJ3bOjlMwkjLfqU-9dAW5MPBL4J2jizk2nini1od3YybvUKC4aFcYfVSFaylFpSA8wnswBj___FQ14gB8gS-AvXuMZWwluqXUWoDYDUKFxRjyQPXdyzuwbWBKfQ9s7n-I-2cuZn4jYioneXVOdqc7xXwHs_0nUp5LRj_RCiSHIvT0mqWqebZbK_Ohx_LPuzEUGDPQF8FMTTNk5OSmIQ4xaB7KbhwSVrRtHUTWKHBw7EB0SA_HUIQXMp3qDIoyPWiCpTSVkTB9O6fSOEwNzI7YbVNJQqQxwOuMaYEo64coT7x25TfQg5P2uVuKbqwIHl8TfFep6KWx3y24ho6H4fToum0OQn6R5kmouYFdoBfwcQR4XumZxUlvV5XUtkQ3PaBVyYj9YyOuE5Ura0TkW5A85sG1Z8rwiGPmp6bCKSelK1x7VjzUnTd4R-l74TaswMfF8e6ZdRhbGQ-W3henqYX5I0YtvV8Tk648RLTEFESTmFYqLxLi50zcqEXU1c3Y9QRDW3hU_3wMjwXJCLtSv-6NegfN8uozQnAmV0PWpHpCuvyoyAc-YAytJf3Pxt2yhR0VyGzcxVb3f2paPlTIJZLwEj2SyHm7h1kV4_oUvhheUgKNq9rE8ljE9OkzCUWFyWMGaABC-ItgJU-YGNe-qrdRQGxm8GSIEIQgtujtsGnfIcfT9AEsmrs-lCW0WbQzyhBmBfo2TPmssvd3TuUyuh-iFPjNsB6FPgqCgRzWskjy6OlNa7A61sWqxapEwRNwKsgW0T1U-tfHLy6KEoGS1dcxkKV8GeW4fQPVRlNiLS_Imr40UfFKaOoFuQrocliFTg2GCsCcnWmPw2r7WwuTmDUVaCI7uQLMw86BQa1kKnwn7-QHQ9L0Og4v8PdSAxx_2NSKj4PDcWeaxOmCg=s0-l75-ft'],
-['https://ci3.googleusercontent.com/mail-img-att/AGAZnRogKrXozQaHBu5yV2k8aSZ2jJG8yUxLSuNK117kq_pCCbSVz7VY7I6N_KqrNTGKDZz-bGF9vHJotKE6DQx9aAU8nSIY3TgcVaqtJhANwrIokj0cqeByAhyAshKTr5HH8_RQlmkRgRAsJ7ciHanI_5TskEY_IIyBgekZXf2LzRitH_AEEqb5shw4rsQSLwb4Vf1R2VLjaQQFTTuvvwiEO9T09gnPHL_bn3eTaP2HF2ue8hJZ-QNb9SGT47lmQKTNX4GfegHFjooDTuG0z3hl5O0y1gvTAKc4An47spfCKBAok7fMawO0Qxd6ngiABYKJbPwuyEnw-1KLr8nERwmgtOlEsbAC8qcbH0omDiwB093wFERZq-eYrIAy_kqLBcYlQek_NjRwR7a2abDqtZEFZ5MrB1JLoW3VTONp6PcrX0K6B4XRI6boLW5yWu9Kvd6phSsFimskRJhTIQdtKPiS8jrFPOjKs-MJM3zRBS30MxCuyFlDFXNfD6D0TSvJ4AwFje0yAuJBzVqu6Hjdi-Mypd5LUQV5yQqDpaIFyBJpG1dHppjyyYR07xRr1yw_kaRK2qQ6FQps-zfNiL84t9D-MGLtI85ED8GaxHrD8x7MP9pzG-vFusXtEka3sXFE76ZrPOsvp19tpZkqGPVtVaGPOwrxoZNu7v3ED0-fqdC_Im38Cv4OJRx5RCxdGD5RTeqGA0vnOUaiQAleZEOaESlHGpedAG3hYbvjxozNnTCDShbkitDvv7Q_gOpt2kLgmB3x_gkZluEvFE3RtHD8ZGZSibgNdTQivWz1vtFvEAxQ7gFw8DRPxJBA4QaCjz7fywKDudxpNuipxzGKmXvlz0p_mvqmJ1B3djaEW3vXERb7VJi3LFjJoi2n5fZN4OPyj9gy3kAWygfYQZtwCmUYQHRlxZNaiAPGsxIjdMx_44BhQacQAKH548RAnrkVk_opKh_qQXxanS65elx6CbpbHLFxvXElpx2z2DnmkgC-1VR7Nht1h6OQcbEfVeVUa8cREZhzv4fwSMG8zbGat6M9b-iG3d8I5IQ=s0-l75-ft'],
-['https://ci3.googleusercontent.com/mail-img-att/AGAZnRq5INw4UI0kn_ne0FWODIbLVJFJ2uWGbj4sBvAVahctYAdqYj4In-4lGN5fC9_E5QypwnI8GuaNk2bLmlcKYhTOZEAP2JBfjfx_b6-VdHPkJ600hn5aYnwMrAe8yPD_dOlL9jV7M2J1aBruSgPvywW26EJCYAsefZwoBPjEUEhnJ1-P8snv1bxGhFqW4DhOecwXX0q1Ua_xoPVQUmc8Xj_aZcRQbFFoRD5iTi3kUEaZbxJmQfVT9HQczs1MAh1PigvXWr087LhMyy933fnA5rA0TvhkK4heTlSFkBMinqhaEQqUdpjOrQspdzTB8AHd2qOym_y2ht7dCuGvJw-dZVgSW85fwPaK9KL9Og5xxOpprdWxiXdeaMF6Pe7NSNSlu9eaGXAoz4l4WkwfEJXMczxF26RK_DAd51QiPzpnZ4n3F64OqePvMxFtwkkWvk3hyptrMv9soYaebOTHVN3qI1UxAF1v1CDT4j-yNdw5O0MdgLKr7NNRrF5vD_uc7ZTqJ_NhFXpLGCm5E8JcjWuNwsnK6qRqJlZzpGm3NTDQgkECrZXHskmZF8aulw-tpOkMnRDKmF1sIxLmbjBYnVed8sDBMkZNtt0K2DNTIAoJeeKUe6hEbHHVdEZnpdHlaqU5KIOIGyg0rLCiDGxcKdvwdv2ZovwUysELUFcILTccH_YhTF98BP00p8K3o-mYp5HFArsmfJpJu59YIkTf_JQ6Un87cOltY8YpS5gfNFXO7GJk8hajAyt65kyFxTfOY3eNdPYICoqMR7jFvOaSI8blihXA8McQK1G1XCNXY4OFt1YxmIMyFTEY1zqxTlcsmM7r504VINRWvrCV6DLX1gADAmnSStGlXyX4Ne_9HTFMp9WuSzHxcDA1A10frB5JyzODIJIlYgsvb809Wb2ulKyBxZVj7vkzqRnvLrOFVqNcZeEucbb_numzmJxhsmC0CokEnbneUzbg9Oidse8fwRIMLaZ3bEz8wjI9VV7eM3ySTQvgjxdykvt3VbvdCId9LlbVqsAu_Na6JAQKCHW-swpL578VSBo=s0-l75-ft'}
-        ]];
+           
 
-        const container = document.getElementById('image-container');
-
-    function getRandomIntInclusive(1, 3) {
-  const minCeiled = Math.ceil(1);
-  const maxFloored = Math.floor(3);
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-}
-       for (let i = 0; i < images.length; i++) {
-            const img = document.createElement('img');
-            img.src = images[getRandomIntInclusive(1, 3)];
-            container.appendChild(img);
-        }
-            
-    </script>
-
-    </body>
-
-</html>
+</body> 
+</html>   
