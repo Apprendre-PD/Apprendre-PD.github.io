@@ -5,7 +5,9 @@ body {
    background-repeat: no-repeat; 
    height: 100vh;
    margin: 0;
-
-   font-size: 14px
 }
 
+h1 {
+   font-size: 14px
+   color: rgb(169, 169, 169)
+}
