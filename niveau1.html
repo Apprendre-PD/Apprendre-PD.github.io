@@ -1,34 +1,58 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>Apprendre-PD</title>
-        <link rel="stylesheet" href="niveau1.css">
-        <script>
-        function getRandomImage() {
-            //declare an array to store images
-            var randomImage = new Array();
-            //0,1,2,3,4,5
-            randomImage[0] = "a1.jpg";
-            randomImage[1] = "https://ci3.googleusercontent.com/mail-img-att/AGAZnRpva_1iQpv130uxdo_oS5ZsuLsToOjjKV7pPqc5GG3-HDsTyQ1m9k86QpzIATKPbn3fO19KizIQZpi-qrmKdTSsenkmOB7Iu4TokY1fYco9mT_BiN9Wn-ln9ZB7yFhXDk1Bjt4E4hVHJ-WcGwZJDe5xvU_f_ZBuPYZHEF4ho3AHr5Yo6uP5Cy5ZJBr1-jyi8cYzZlWlh5Xa1eEnm_JuRSpgohCPUuZx5x_ehDJT0KVLgu3T-QYcV2wsF2YOcg50XA7QxUBclVn8BTOcGzgw_RTEu6aK0Nfequ0VfAgc6122KQZJKlz4Z220GMcRcQnucrLE7xq8U9rGAhx6kBl2Ad8iCX3vWLHfbhQUCvu8ZuGkuqXh12ZhIu4Mh-2JvmyZl5ZNyBLVs9xokXU07Msvyt6QPBf1NFIT1oM41rzhLfjN6K2OYpO-7SNGjvBmSRAFraifeMA9GEwouroJhphSKLbbBYTvdSgsZ0yqVDuh1pMyjZbZP8kBSLEFg5z7ekQACcnWyjiZTckznAk9KQ-x3QCT8noKgGpJ_AYgfk_1JzMNC1hb-aryQlwuH3QRGdM-k3nVTAhamSqwSYH9tTHNdmXURSQZpHEjRvEMUAAgDn5nxs6DGL1yfRogNAMfkbrkrTAWm815nsg0ujDAkao-3J8eeEwFgB21uF-JIRY_rGU4p51QT1-6uplDvPnw26Uij-2ifbHdNBCulJGVTmIfeTuSjjJjDB4ay0L80UGdONkFswUQ8PdHBqssvWE2zGYx2ocmTZhYOtrzQnmNwSCmOZaKPj3700yZPO5UxoLVZTC7rlH2sGZMQFQQEc5OpR_0xzMYTPWKe3DlmLh2FZ857FElLwuJWXz5rdUCMAnqIr9d4-w5ZVNE_zdAlO168uvoA2EHgwowTyufgjz7ocGpNWgqXVOnCoXpsyYuiyVIqD0_4LV7V4yCoMHUjW_J2z5WB0Uh1bPSTkfr2lQQnlPAs7SSsIopO--m5aYUDj0VNRthn0kMOdur3BJXZjl-j8Hu_iZdNDBCElYLqVKwkjZQ3Q8odAHy=s0-l75-ft;
-            randomImage[2] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-            randomImage[3] = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-            randomImage[4] = "https://images.unsplash.com/photo-1501265976582-c1e1b0bbaf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-            randomImage[5] = "https://wi.wallpapertip.com/wsimgs/156-1565522_puppies-desktop-wallpaper-desktop-background-puppies.jpg";
+<head>
+    <title>Random Image Genrator</title>
+</head>
+    <style>
+        .footer {
+            position: absolute;
+            bottom: 200px;
+            width: 100%;
+        
+        }
+    </style>
 
-        // genrate a number and provide to genrate image accordingly
-        var number = Math.floor(Math.random()*randomImage.length); 
-         // return the images which are genrated
-         return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-        } 
-        </script>
-    </head>
+<body>
+<center><h2 > Niveau 1</center></h2>
+<center><p><button onclick="getRandomImage();">Generate Image</button></p></center>
 
-    <body>
+    <div class="footer" align="center">
+        <label for="cars">Quelle couleur est l'objet:</label>
+        <select id="couleur" name="couleur">
+          <option value="vert">Vert</option>
+          <option value="Rouge"">Rouge</option>
+          <option value="Bleu">Bleu</option>
+          <option value="Mauve">Mauve</option>
+        </select>
+        <label for="cars">Quelle fig:</label>
+        <select id="cars" name="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="fiat">Fiat</option>
+          <option value="audi">Audi</option>
+        </select>
+</div>
 
-         <a href = "index.html"><img src ="https://cdn-icons-png.flaticon.com/512/25/25694.png"alt="home" width="30"/></a>
+    
+<br> <br>
+    <script>
+        
+    function getRandomImage() {
+        //declare an array to store images
+        var randomImage = new Array();
+        //0,1,2,3,4,5
+        randomImage[0] = "https://ci3.googleusercontent.com/mail-img-att/AGAZnRrP-uRPW3rQu0WK47nD65AuVXTDWza53RFu8aDa5enPdIfOYOnIJmUOm0QsHMxbC-rYtHcrhijTXnvkGL47K98JuFuZxXrNXeFisAlrBKgJATlXC24JeV2AtNJW0NuOPnCYWuOEy_PP1NldL31NVMkaZPgmo9g20NWORTu_QtEbkqRTaH9w1y49dYoUfJCbo5FjwZK4shtULFrhTchMJefE2VLOMZRkRi9ABBvwZqmzRKBdSvtz0_ByumQsB05FJfbkzjcqVfw4BVywL3_Hr7390jxAAByA0AL8j7J3ieDDvTzPzZLPqFvyaUKRVim_ogo3ZHRvq8Bp0bs7W1XKH8ohBjsnLrGBZF6jG664-w4XWT3C1jwQCSI3iqgjjNtVLpW7tI6GbSI1-K4HGp8WcpfSU-mvYJeTo3ZyxKC8eXLBmfwqg4UaqMSJydibZd6_DLzEZnJ2xsxEWLRMeeuXnf7sOsQGFTVX8rGcH1qpFB-JK3QqzNSnTT4HRNJme8dau95jEGCgh4fkdnHXLEp-aJzja8C6g7nbMLtFPTGCi3caMqlEik4zeXomr54_7KT-dAiyfcPvPHnjWZhINqGxW3ySe7Ldf2tiW_4SrNLF3xtADL9c13dXm8QimONfT2r45vf_NJxcehwk1nx3BMEcF4XSjjVX1dJb4JsBGHmp-lnp2-mqOtm8do_vG0lABRuQdzC9Z16f0arz-BC_lIivPbTbBwW6eFrUPXszVmCwLLiT4Gky9FLpJeZ8VJwwee6uK9JCU-_ChPvqxZnqDAbxcIqhMvOg4X3R0Km0k0QU1Q92XsY0egmRcNjZ3ZNINtmJ2BlQjHcOrup77l5Pn7PTaq6ejLDJqt51dfdmm_yeR7luAeyuhT1S6L1QTZzfq4VHInAEbrrr0NsNyPL1LCZNSsrSzcmV-4oz4znhHZ6Dz905f2abG_yUGc0kX3X6wWUkNFQEadosoTI5IKJgEyhH4RbILkZ_Wq7RVsQmmUDVWMRv_k0WFmyQ6BDLd76R_uQV9gvVyT8s4GdbZdPFBUg5-sYfrA=s0-l75-ft";
+        randomImage[1] = "http://www.petsworld.in/blog/wp-content/uploads/2014/09/running-cute-puppies.jpg";
+        randomImage[2] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+        randomImage[3] = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+        randomImage[4] = "https://images.unsplash.com/photo-1501265976582-c1e1b0bbaf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+        randomImage[5] = "https://wi.wallpapertip.com/wsimgs/156-1565522_puppies-desktop-wallpaper-desktop-background-puppies.jpg";
 
-        <h1> Quiz 1</h1>
-           
-
+    // genrate a number and provide to genrate image accordingly
+    var number = Math.floor(Math.random()*randomImage.length); 
+     // return the images which are genrated
+     return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+    } 
+    </script>
+<span id="result" align="center"> </span>
 </body> 
 </html>   
