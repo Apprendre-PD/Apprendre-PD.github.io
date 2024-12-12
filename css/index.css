@@ -11,3 +11,7 @@ body {
    font-size: 14px
    color: rgb(169, 169, 169)
 }
+body {
+  font-family: Courier New;
+  background-color: #A9A9A9;
+}
