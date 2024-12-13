@@ -6,8 +6,15 @@
         .footer {
             position: absolute;
             bottom: 200px;
-            width: 100%;
-        
+            width: 99%;
+           margin:auto;
+
+        }
+        .paper{
+            background-color: white;
+            width: 500px;
+            height: 500px;
+            margin:auto;
         }
 
         body {
@@ -15,14 +22,16 @@
   background-repeat: no-repeat;
 background-attachment: fixed;
   background-size: cover;
+            position: absolute;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
   }
-        .paper{
-            background-color: white;
-        }
+        
     </style>
 
 <body>
-<div class="paper"><center><h2 > Niveau 1</center></h2>
+<div class="paper" align= "center" ><center><h2 > Niveau 1</center></h2>
 <center><p><button onclick="getRandomImage();">Generate Image</button></p></center>
 
     <div class="footer" align="center">
@@ -40,12 +49,12 @@ background-attachment: fixed;
           <option value="fiat">Fiat</option>
           <option value="audi">Audi</option>
         </select>
-</div>
+</div></div>
 
-    
-<br> <br></div>
+
+<br> <br>
     <script>
-        
+
     function getRandomImage() {
         //declare an array to store images
         var randomImage = new Array();
@@ -65,4 +74,4 @@ background-attachment: fixed;
     </script>
 <span id="result" align="center"> </span>
 </body> 
-</html>   
+</html> 
