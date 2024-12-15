@@ -4,46 +4,60 @@
     <title>Apprendre-PD</title>
     <link rel="stylesheet" href="css/index.css">
     <style>
-body {
-    background-image: url("image/pixelcut-export.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;                
-    justify-content: center;      
-    align-items: flex-start;      
-    background-attachment: fixed; 
-}
-
-.paper{
-            background-color: white;
-            width: 500px;
-            height: 500px;
-           
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;                
+            justify-content: center;      
+            align-items: center;      
+            background-attachment: fixed; 
         }
 
+        .paper {
+            background-color: white;
+            width: 500px;
+            height: auto;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
 
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
 
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .grid img {
+            width: 80px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="paper">
         <h1>Apprendre-PD</h1>
         <p>Bienvenue aux jeux Apprendre-PD, ici tu peux jouer des jeux éducatifs pour chaque niveau d'élémentaire</p>
-        <br>
-        <br>
-        <br>
-        <br>
-        <a href="niveau1.html"><img src="image/1.jpg" alt="1e année" width="80"/></a>
-        <a href="niveau2.html"><img src="image/2.jpg" alt="2e année" width="80"/></a>
-        <a href="niveau3.html"><img src="image/3.jpg" alt="3e année" width="80"/></a>
-        <br>
-        <br>
-        <a href="niveau4.html"><img src="image/4.jpg" alt="4e année" width="80"/></a>
-        <a href="niveau5.html"><img src="image/5.jpg" alt="5e année" width="80"/></a>
-        <a href="niveau6.html"><img src="image/6.jpg" alt="6e année" width="80"/></a>
+        <div class="grid">
+            <a href="niveau1.html"><img src="image/1.jpg" alt="1e année"></a>
+            <a href="niveau2.html"><img src="image/2.jpg" alt="2e année"></a>
+            <a href="niveau3.html"><img src="image/3.jpg" alt="3e année"></a>
+            <a href="niveau4.html"><img src="image/4.jpg" alt="4e année"></a>
+            <a href="niveau5.html"><img src="image/5.jpg" alt="5e année"></a>
+            <a href="niveau6.html"><img src="image/6.jpg" alt="6e année"></a>
+        </div>
     </div>
 </body>
 </html>
