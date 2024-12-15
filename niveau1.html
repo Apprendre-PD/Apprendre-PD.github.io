@@ -35,6 +35,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+        .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
         
     </style>
 
@@ -60,11 +65,11 @@
           <option value="audi">Audi</option>
         </select>
        
-</div>
+
 
 
 <br> <br>
-    <script>
+  <div class="clearfix">  <script>
 
     function getRandomImage() {
         //declare an array to store images
@@ -82,7 +87,7 @@
      // return the images which are genrated
      return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
     } 
-    </script>
+    </script></div>
 <span id="result" align="center"> </span>
 </body> 
 </html> 
