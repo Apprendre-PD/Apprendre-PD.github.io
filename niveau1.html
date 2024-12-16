@@ -50,19 +50,19 @@
     <span id="result" align="center"> </span>
 </div> 
     <div class="footer" align="center">
-        <label for="cars">Quelle couleur est l'objet:</label>
+        <label for="couleurs">Quelle couleur est l'objet:</label>
         <select id="couleur" name="couleur">
           <option value="vert">Vert</option>
           <option value="Rouge"">Rouge</option>
           <option value="Bleu">Bleu</option>
           <option value="Mauve">Mauve</option>
         </select>
-        <label for="cars">Quelle fig:</label>
-        <select id="cars" name="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
+        <label for="formes">Quelle fig:</label>
+        <select id="formes" name="formes">
+          <option value="carré">Volvo</option>
+          <option value="cercle">Saab</option>
+          <option value="rectangle">Fiat</option>
+          <option value="triangle">Audi</option>
         </select>
        
 
@@ -71,11 +71,12 @@
 <br> <br>
   <div class="clearfix">  <script>
 
+      var vies==3
     function getRandomImage() {
         //declare an array to store images
         var randomImage = new Array();
         //0,1,2,3,4,5
-        randomImage[0] = "image/pixelcut-export.jpeg"
+        randomImage[0] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
         randomImage[2] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
         randomImage[3] = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
         randomImage[4] = "https://images.unsplash.com/photo-1501265976582-c1e1b0bbaf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
@@ -86,6 +87,53 @@
      // return the images which are genrated
      return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
     } 
+      switch(number){
+          case 0:
+              if (couleurs="rouge")||(formes="cercle"){
+                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+              }
+              else{
+                  vies=vies-1
+                  
+              }
+              case 1:
+              if (couleurs="rouge")||(formes="cercle"){
+                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+              }
+              else{
+                  vies=vies-1
+                  
+              }
+
+              case 2:
+              if (couleurs="rouge")||(formes="cercle"){
+                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+              }
+              else{
+                  vies=vies-1
+                  
+              }
+
+              case 3:
+              if (couleurs="rouge")||(formes="cercle"){
+                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+              }
+              else{
+                  vies=vies-1
+                  
+              }
+
+              case 4:
+              if (couleurs="rouge")||(formes="cercle"){
+                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
+              }
+              else{
+                  vies=vies-1
+                  
+              }
+              
+              
+      }
     </script></div>
 <span id="result" align="center"> </span>
 </body> 
