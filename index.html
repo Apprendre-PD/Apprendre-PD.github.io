@@ -14,7 +14,10 @@
             display: flex;                
             justify-content: center;      
             align-items: center;      
+                        align-items: flex-start; /* Change to flex-start for top alignment */
             background-attachment: fixed; 
+            flex-direction: column; /* Stack the divs vertically */
+            overflow: hidden; 
         }
 
         .paper {
@@ -24,6 +27,7 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
 
         h1 {
