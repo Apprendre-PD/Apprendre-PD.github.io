@@ -87,53 +87,10 @@
     // genrate a number and provide to genrate image accordingly
     var number = Math.floor(Math.random()*randomImage.length); 
      // return the images which are genrated
+        return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />';
     } 
       var vies==3
-      switch(getRandomImage()){
-          case 0:
-              if (couleurs="rouge")||(formes="cercle"){
-                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-              }
-              else{
-                  vies=vies-1
-                  
-                  
-              }
-              case 1:
-              if (couleurs="rouge")||(formes="cercle"){
-                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-              }
-              else{
-                  vies=vies-1
-                  
-              }
-
-              case 2:
-              if (couleurs="rouge")||(formes="cercle"){
-                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-              }
-              else{
-                  vies=vies-1
-                  
-              }
-
-              case 3:
-              if (couleurs="rouge")||(formes="cercle"){
-                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-              }
-              else{
-                  vies=vies-1
-                  
-              }
-
-              case 4:
-              if (couleurs="rouge")||(formes="cercle"){
-                   return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-              }
-              else{
-                  vies=vies-1
-                  
-              }
+     
               
               
       }
