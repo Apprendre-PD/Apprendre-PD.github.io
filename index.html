@@ -20,11 +20,11 @@
         .paper {
             background-color: white;
             width: 500px;
-            height: 490px;
+            height: 550px;
             text-align: center;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top:700px
+			margin-top: 700px
         }
 
         h1 {
@@ -37,7 +37,7 @@
             margin-bottom: 30px;
         }
 
-        .grid {
+        .numero {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
@@ -45,18 +45,24 @@
             margin-top: auto;
         }
 
-        .grid img {
+        .numero img {
             width: 80px;
             height: auto;
         }
+		#bold{
+		font-size: 18px
+		}
+		
     </style>
 </head>
 <body>
     <div class="paper" align="center" >
         <h1>Apprendre-PD</h1>
         <p>Bienvenue aux jeux Apprendre-PD, ici tu peux jouer des jeux éducatifs pour chaque niveau d'élémentaire</p><br>
-        <p><strong>Choisi ton niveau : </strong></p>
-        <div class="grid">
+        
+		<p id="bold"><strong>Clique sur un numéro pour jouer un jeu : </strong></p>
+		
+        <div class="numero">
             <a href="niveau1.html"><img src="image/1.jpg" alt="1e année"></a>
             <a href="niveau2.html"><img src="image/2.jpg" alt="2e année"></a>
             <a href="niveau3.html"><img src="image/3.jpg" alt="3e année"></a>
