@@ -9,7 +9,6 @@
             width: 500px;
            margin:auto;
             background-color: white;
-            padding:10px;
             height:40px;
 
         }
@@ -88,16 +87,16 @@
     // genrate a number and provide to genrate image accordingly
     var number = Math.floor(Math.random()*randomImage.length); 
      // return the images which are genrated
-     return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
     } 
       var vies==3
-      switch(number){
+      switch(getRandomImage()){
           case 0:
               if (couleurs="rouge")||(formes="cercle"){
                    return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
               }
               else{
                   vies=vies-1
+                  
                   
               }
               case 1:
