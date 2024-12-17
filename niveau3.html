@@ -150,39 +150,48 @@
     }
 
     function checkAnswer() {
-        var answer = parseFloat(document.getElementById('answer').value);
-        var correctAnswer;
+    var answer = document.getElementById('answer').value;
 
-        if (currentQuestion.operator === "+") {
-            correctAnswer = currentQuestion.num1 + currentQuestion.num2;
-        } else if (currentQuestion.operator === "-") {
-            correctAnswer = currentQuestion.num1 - currentQuestion.num2;
-        } else if (currentQuestion.operator === "*") {
-            correctAnswer = currentQuestion.num1 * currentQuestion.num2;
-        } else if (currentQuestion.operator === "/") {
-            correctAnswer = currentQuestion.num1 / currentQuestion.num2;
-        }
-
-        if (answer === correctAnswer) {
-            correctAnswers++;
-            document.getElementById('result').innerHTML = "Correct!";
-            document.getElementById('result').classList.add("correct");
-            document.getElementById('result').classList.remove("incorrect");
-        } else {
-            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
-            document.getElementById('result').classList.add("incorrect");
-            document.getElementById('result').classList.remove("correct");
-        }
-
-        questionsAnswered++;
-        updateProgress();
-
-        if (questionsAnswered < maxQuestions) {
-            generateMathQuestion();
-        } else {
-            endQuiz();
-        }
+    // Validate the input to ensure it's not empty
+    if (answer === '' || isNaN(answer)) {
+        alert("Veuillez entrer un nombre avant de soumettre votre réponse.");
+        return;
     }
+
+    answer = parseFloat(answer); // Convert the input to a float for comparison
+    var correctAnswer;
+
+    if (currentQuestion.operator === "+") {
+        correctAnswer = currentQuestion.num1 + currentQuestion.num2;
+    } else if (currentQuestion.operator === "-") {
+        correctAnswer = currentQuestion.num1 - currentQuestion.num2;
+    } else if (currentQuestion.operator === "*") {
+        correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+    } else if (currentQuestion.operator === "/") {
+        correctAnswer = currentQuestion.num1 / currentQuestion.num2;
+    }
+
+    // Check if the user's answer is correct
+    if (answer === correctAnswer) {
+        correctAnswers++;
+        document.getElementById('result').innerHTML = "Correct!";
+        document.getElementById('result').classList.add("correct");
+        document.getElementById('result').classList.remove("incorrect");
+    } else {
+        document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+        document.getElementById('result').classList.add("incorrect");
+        document.getElementById('result').classList.remove("correct");
+    }
+
+    questionsAnswered++;
+    updateProgress();
+
+    if (questionsAnswered < maxQuestions) {
+        generateMathQuestion();
+    } else {
+        endQuiz();
+    }
+}
 
     function updateProgress() {
         document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
