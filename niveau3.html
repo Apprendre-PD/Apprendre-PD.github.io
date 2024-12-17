@@ -95,7 +95,6 @@
 </div>
 
 <script>
-
     var currentQuestion = {};
     var questionsAnswered = 0;
     var correctAnswers = 0;
@@ -149,58 +148,40 @@
         document.getElementById('result').innerHTML = '';
     }
 
- function validateInput() {
-    var answerInput = document.getElementById('answer').value;
-    var submitBtn = document.getElementById('submitBtn');
+    function checkAnswer() {
+        var answer = parseFloat(document.getElementById('answer').value);
+        var correctAnswer;
 
-    // Enable the button only if the input is a valid number
-    if (answerInput !== '' && !isNaN(answerInput)) {
-        submitBtn.disabled = false;
-    } else {
-        submitBtn.disabled = true;
+        if (currentQuestion.operator === "+") {
+            correctAnswer = currentQuestion.num1 + currentQuestion.num2;
+        } else if (currentQuestion.operator === "-") {
+            correctAnswer = currentQuestion.num1 - currentQuestion.num2;
+        } else if (currentQuestion.operator === "*") {
+            correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+        } else if (currentQuestion.operator === "/") {
+            correctAnswer = currentQuestion.num1 / currentQuestion.num2;
+        }
+
+        if (answer === correctAnswer) {
+            correctAnswers++;
+            document.getElementById('result').innerHTML = "Correct!";
+            document.getElementById('result').classList.add("correct");
+            document.getElementById('result').classList.remove("incorrect");
+        } else {
+            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+            document.getElementById('result').classList.add("incorrect");
+            document.getElementById('result').classList.remove("correct");
+        }
+
+        questionsAnswered++;
+        updateProgress();
+
+        if (questionsAnswered < maxQuestions) {
+            generateMathQuestion();
+        } else {
+            endQuiz();
+        }
     }
-}
-
-// Updated checkAnswer function (unchanged logic)
-function checkAnswer() {
-    var answer = parseFloat(document.getElementById('answer').value); 
-    var correctAnswer;
-
-    if (currentQuestion.operator === "+") {
-        correctAnswer = currentQuestion.num1 + currentQuestion.num2;
-    } else if (currentQuestion.operator === "-") {
-        correctAnswer = currentQuestion.num1 - currentQuestion.num2;
-    } else if (currentQuestion.operator === "*") {
-        correctAnswer = currentQuestion.num1 * currentQuestion.num2;
-    } else if (currentQuestion.operator === "/") {
-        correctAnswer = currentQuestion.num1 / currentQuestion.num2;
-    }
-
-    // Check if the user's answer is correct
-    if (answer === correctAnswer) {
-        correctAnswers++;
-        document.getElementById('result').innerHTML = "Correct!";
-        document.getElementById('result').classList.add("correct");
-        document.getElementById('result').classList.remove("incorrect");
-    } else {
-        document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
-        document.getElementById('result').classList.add("incorrect");
-        document.getElementById('result').classList.remove("correct");
-    }
-
-    questionsAnswered++;
-    updateProgress();
-
-    // Reset input and disable the button for the next question
-    document.getElementById('answer').value = '';
-    document.getElementById('submitBtn').disabled = true;
-
-    if (questionsAnswered < maxQuestions) {
-        generateMathQuestion();
-    } else {
-        endQuiz();
-    }
-}
 
     function updateProgress() {
         document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
@@ -234,7 +215,5 @@ function checkAnswer() {
         window.location.href = "index.html";
     }
 </script>
-
-
 </body>
 </html>
