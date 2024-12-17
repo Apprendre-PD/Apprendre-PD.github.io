@@ -23,7 +23,7 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 50px; /* Adjust margin-top to ensure it's centered */
+            margin-top: 50px;
         }
 
         .footer {
@@ -100,7 +100,7 @@
 
 <script>
     function getRandomImage() {
-        // Declare an array to store images
+       
         var randomImage = new Array();
         randomImage[0] = "image/a1.jpg";
         randomImage[1] = "image/a2.jpg";
@@ -108,7 +108,7 @@
         randomImage[3] = "image/a4.jpg";
         randomImage[4] = "image/a5.jpg";
 
-        // Generate a random number and provide the image accordingly
+        
         var number = Math.floor(Math.random() * randomImage.length); 
         document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
     }
