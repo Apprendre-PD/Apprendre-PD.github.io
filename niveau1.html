@@ -1,28 +1,19 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Apprendre-PD</title>
-</head>
     <style>
-        .footer {
-            position: absolute;
-            bottom: 100px;
-            width: 500px;
-           margin:auto;
-            background-color: white;
-            height:40px;
-
-        }
         body {
             background-image: url("image/pixelcut-export.jpeg");
             background-repeat: no-repeat;
-           background-size: cover;
+            background-size: cover;
             margin: 0;
             padding: 0;
-            height: 100px;
-            display: flex;                
-            justify-content: center;      
-            align-items: center;      
-            background-attachment: fixed; 
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
         }
 
         .paper {
@@ -32,70 +23,96 @@
             text-align: center;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-		margin-top: 700px
-        
-        img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-        .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-        
-    </style>
+            margin-top: 50px; /* Adjust margin-top to ensure it's centered */
+        }
 
+        .footer {
+            position: absolute;
+            bottom: 100px;
+            width: 500px;
+            margin: auto;
+            background-color: white;
+            height: 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        select {
+            padding: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        #result img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            height: 500px;
+        }
+    </style>
+</head>
 <body>
 
-<div class="paper" align= "center" ><center><h2 > Niveau 1</center></h2>
-<center><p><button onclick="getRandomImage();">Generate Image</button></p></center>
+<div class="paper">
+    <h2>Niveau 1</h2>
+    <p><button onclick="getRandomImage();">Generate Image</button></p>
 
-    <span id="result" align="center"> </span>
-</div> 
-    <div class="footer" align="center">
-        <label for="couleurs">Quelle couleur est l'objet:</label>
-        <select id="couleur" name="couleur">
-          <option value="vert">Vert</option>
-          <option value="Rouge"">Rouge</option>
-          <option value="Bleu">Bleu</option>
-          <option value="Mauve">Mauve</option>
-        </select>
-        <label for="formes">Quelle fig:</label>
-        <select id="formes" name="formes">
-          <option value="carré">carré</option>
-          <option value="cercle">cercle</option>
-          <option value="rectangle">rectangle</option>
-          <option value="triangle">triangle</option>
-        </select>
-       
+    <span id="result"></span>
+</div>
 
+<div class="footer">
+    <label for="couleurs">Quelle couleur est l'objet:</label>
+    <select id="couleur" name="couleur">
+        <option value="vert">Vert</option>
+        <option value="Rouge">Rouge</option>
+        <option value="Bleu">Bleu</option>
+        <option value="Mauve">Mauve</option>
+    </select>
 
+    <label for="formes">Quelle fig:</label>
+    <select id="formes" name="formes">
+        <option value="carré">Carré</option>
+        <option value="cercle">Cercle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="triangle">Triangle</option>
+    </select>
+</div>
 
-<br> <br>
-  <div class="clearfix">  <script>
-
-      
+<script>
     function getRandomImage() {
-        //declare an array to store images
+        // Declare an array to store images
         var randomImage = new Array();
-        //0,1,2,3,4,5
         randomImage[0] = "image/a1.jpg";
         randomImage[1] = "image/a2.jpg";
         randomImage[2] = "image/a3.jpg";
         randomImage[3] = "image/a4.jpg";
         randomImage[4] = "image/a5.jpg";
-        
 
-    // genrate a number and provide to genrate image accordingly
-    var number = Math.floor(Math.random()*randomImage.length); 
-     // return the images which are genrated
-        return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]'" width="400" 
-     height="500" />';
-    } 
-     
-    </script></div>
-<span id="result" align="center"> </span>
-</body> 
-</html> 
+        // Generate a random number and provide the image accordingly
+        var number = Math.floor(Math.random() * randomImage.length); 
+        document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
+    }
+</script>
+
+</body>
+</html>
