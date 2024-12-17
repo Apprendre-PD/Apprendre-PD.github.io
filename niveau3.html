@@ -1,48 +1,155 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Random Image Genrator</title>
-</head>
+    <title>Quiz Mathématique pour 3ème année</title>
     <style>
+        body {
+            background-image: url("image/pixelcut-export.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+        }
+
+        .paper {
+            background-color: white;
+            width: 500px;
+            height: 550px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 105px;
+        }
+
         .footer {
             position: absolute;
-            bottom: 200px;
-            width: 100%;
-        
+            bottom: 100px;
+            width: 500px;
+            margin: auto;
+            background-color: white;
+            height: 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        select {
+            padding: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result.correct {
+            color: green;
+        }
+
+        .result.incorrect {
+            color: red;
         }
     </style>
-
+</head>
 <body>
-<center><h2 > Niveau 1</center></h2>
-<center><p><button onclick="getRandomImage();">Generate Image</button></p></center>
 
-    <div class="footer" align="center">
-        <label>couleur:</label>
-        <input type="text" name="" required="">
-        <label>forme:</label>
-    <input type="text" name="" required="">
+<div class="paper">
+    <h2>Quiz Mathématique pour 3ème année</h2>
+    <p><button onclick="generateMathQuestion();">Générer une question</button></p>
+
+    <div id="question"></div>
+    <div class="result" id="result"></div>
+
+    <input type="number" id="answer" placeholder="Entrez votre réponse" />
+    <button onclick="checkAnswer();">Soumettre la réponse</button>
 </div>
 
-    
-<br> <br>
-    <script>
-        
-    function getRandomImage() {
-        //declare an array to store images
-        var randomImage = new Array();
-        //0,1,2,3,4,5
-        randomImage[0] = "https://ci3.googleusercontent.com/mail-img-att/AGAZnRrP-uRPW3rQu0WK47nD65AuVXTDWza53RFu8aDa5enPdIfOYOnIJmUOm0QsHMxbC-rYtHcrhijTXnvkGL47K98JuFuZxXrNXeFisAlrBKgJATlXC24JeV2AtNJW0NuOPnCYWuOEy_PP1NldL31NVMkaZPgmo9g20NWORTu_QtEbkqRTaH9w1y49dYoUfJCbo5FjwZK4shtULFrhTchMJefE2VLOMZRkRi9ABBvwZqmzRKBdSvtz0_ByumQsB05FJfbkzjcqVfw4BVywL3_Hr7390jxAAByA0AL8j7J3ieDDvTzPzZLPqFvyaUKRVim_ogo3ZHRvq8Bp0bs7W1XKH8ohBjsnLrGBZF6jG664-w4XWT3C1jwQCSI3iqgjjNtVLpW7tI6GbSI1-K4HGp8WcpfSU-mvYJeTo3ZyxKC8eXLBmfwqg4UaqMSJydibZd6_DLzEZnJ2xsxEWLRMeeuXnf7sOsQGFTVX8rGcH1qpFB-JK3QqzNSnTT4HRNJme8dau95jEGCgh4fkdnHXLEp-aJzja8C6g7nbMLtFPTGCi3caMqlEik4zeXomr54_7KT-dAiyfcPvPHnjWZhINqGxW3ySe7Ldf2tiW_4SrNLF3xtADL9c13dXm8QimONfT2r45vf_NJxcehwk1nx3BMEcF4XSjjVX1dJb4JsBGHmp-lnp2-mqOtm8do_vG0lABRuQdzC9Z16f0arz-BC_lIivPbTbBwW6eFrUPXszVmCwLLiT4Gky9FLpJeZ8VJwwee6uK9JCU-_ChPvqxZnqDAbxcIqhMvOg4X3R0Km0k0QU1Q92XsY0egmRcNjZ3ZNINtmJ2BlQjHcOrup77l5Pn7PTaq6ejLDJqt51dfdmm_yeR7luAeyuhT1S6L1QTZzfq4VHInAEbrrr0NsNyPL1LCZNSsrSzcmV-4oz4znhHZ6Dz905f2abG_yUGc0kX3X6wWUkNFQEadosoTI5IKJgEyhH4RbILkZ_Wq7RVsQmmUDVWMRv_k0WFmyQ6BDLd76R_uQV9gvVyT8s4GdbZdPFBUg5-sYfrA=s0-l75-ft";
-        randomImage[1] = "http://www.petsworld.in/blog/wp-content/uploads/2014/09/running-cute-puppies.jpg";
-        randomImage[2] = "https://images.unsplash.com/photo-1543877087-ebf71fde2be1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-        randomImage[3] = "https://images.pexels.com/photos/142497/pexels-photo-142497.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-        randomImage[4] = "https://images.unsplash.com/photo-1501265976582-c1e1b0bbaf63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-        randomImage[5] = "https://wi.wallpapertip.com/wsimgs/156-1565522_puppies-desktop-wallpaper-desktop-background-puppies.jpg";
+<div class="footer">
+    <label for="difficulties">Sélectionnez la difficulté:</label>
+    <select id="difficulty" name="difficulty">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyenne</option>
+        <option value="hard">Difficile</option>
+    </select>
+</div>
 
-    // genrate a number and provide to genrate image accordingly
-    var number = Math.floor(Math.random()*randomImage.length); 
-     // return the images which are genrated
-     return document.getElementById('result').innerHTML = '<img src="' + randomImage[number]+'" />'; 
-    } 
-    </script>
-<span id="result" align="center"> </span>
-</body> 
-</html>   
+<script>
+    var currentQuestion = {};
+
+    function generateMathQuestion() {
+        var difficulty = document.getElementById('difficulty').value;
+        var num1, num2, operator;
+
+        // Choose numbers and operator based on difficulty level
+        if (difficulty === "easy") {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            operator = Math.random() < 0.5 ? "+" : "-";
+        } else if (difficulty === "medium") {
+            num1 = Math.floor(Math.random() * 20) + 1;
+            num2 = Math.floor(Math.random() * 20) + 1;
+            operator = Math.random() < 0.33 ? "+" : (Math.random() < 0.5 ? "-" : "*");
+        } else { // hard
+            num1 = Math.floor(Math.random() * 50) + 1;
+            num2 = Math.floor(Math.random() * 50) + 1;
+            operator = Math.random() < 0.25 ? "+" : (Math.random() < 0.5 ? "-" : "*");
+        }
+
+        currentQuestion = { num1, num2, operator };
+        document.getElementById('question').innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`;
+        document.getElementById('answer').value = '';
+        document.getElementById('result').innerHTML = '';
+    }
+
+    function checkAnswer() {
+        var answer = parseInt(document.getElementById('answer').value);
+        var correctAnswer;
+
+        // Calculate the correct answer based on the operator
+        if (currentQuestion.operator === "+") {
+            correctAnswer = currentQuestion.num1 + currentQuestion.num2;
+        } else if (currentQuestion.operator === "-") {
+            correctAnswer = currentQuestion.num1 - currentQuestion.num2;
+        } else if (currentQuestion.operator === "*") {
+            correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+        }
+
+        // Check if the answer is correct
+        if (answer === correctAnswer) {
+            document.getElementById('result').innerHTML = "Correct!";
+            document.getElementById('result').classList.add("correct");
+            document.getElementById('result').classList.remove("incorrect");
+        } else {
+            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+            document.getElementById('result').classList.add("incorrect");
+            document.getElementById('result').classList.remove("correct");
+        }
+    }
+</script>
+
+</body>
+</html>
