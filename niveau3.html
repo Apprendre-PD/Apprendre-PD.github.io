@@ -79,6 +79,15 @@
 
 <div class="paper">
     <h2>Quiz Mathématique pour 3ème année</h2>
+    <p>Clique sur le bouton vert pour générer un question de maths</p>
+    <div class="footer">
+    <label for="difficulties">Sélectionnez la difficulté:</label>
+    <select id="difficulty" name="difficulty">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyenne</option>
+        <option value="hard">Difficile</option>
+    </select>
+</div>
     <p><button onclick="generateMathQuestion();">Générer une question</button></p>
 
     <div id="question"></div>
@@ -88,14 +97,6 @@
     <button onclick="checkAnswer();">Soumettre la réponse</button>
 </div>
 
-<div class="footer">
-    <label for="difficulties">Sélectionnez la difficulté:</label>
-    <select id="difficulty" name="difficulty">
-        <option value="easy">Facile</option>
-        <option value="medium">Moyenne</option>
-        <option value="hard">Difficile</option>
-    </select>
-</div>
 
 <script>
     var currentQuestion = {};
