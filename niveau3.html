@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Mathématique pour 3ème année</title>
     <style>
         body {
@@ -64,45 +66,80 @@
         .result.incorrect {
             color: red;
         }
+
+        .progress {
+            font-size: 18px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div class="paper">
-  
     <h2>Quiz Mathématique pour 3ème année</h2>
-	
-    <p>Clique sur le difficulter que tu veut et après clique sur le bouton vert pour générer un question de maths</p>
-    <label for="difficulties">Sélectionnez la difficulté:</label>
+
+    <p>Clique sur la difficulté que tu veux et après clique sur le bouton vert pour générer une question de maths</p>
+
+    <label for="difficulty">Sélectionnez la difficulté:</label>
     <select id="difficulty" name="difficulty">
         <option value="easy">Facile</option>
         <option value="medium">Moyenne</option>
         <option value="hard">Difficile</option>
     </select>
-    <p><button onclick="generateMathQuestion();">Générer une question</button></p>
+    <p><button onclick="startQuiz();">Démarrer le Quiz</button></p>
 
-    <div id="question"></div>
-    <div class="result" id="result"></div>
+    <div id="quizSection" style="display: none;">
+        <div id="question"></div>
+        <input type="number" id="answer" placeholder="Entrez votre réponse" />
+        <button onclick="checkAnswer();">Soumettre la réponse</button>
+        <div class="result" id="result"></div>
+        <div class="progress" id="progress"></div>
+    </div>
 
-    <input type="number" id="answer" placeholder="Entrez votre réponse" />
-    <button onclick="checkAnswer();">Soumettre la réponse</button>
-
+    <div id="endMessage" style="display: none;"></div>
+    <div id="endButtons" style="display: none;"></div>
 </div>
-
 
 <script>
     var currentQuestion = {};
+    var questionsAnswered = 0;
+    var correctAnswers = 0;
+    var maxQuestions = 5;
+    var quizStarted = false;
+    var difficultyLevel = '';
 
+    // Start the quiz by hiding the level selection and showing the quiz section
+    function startQuiz() {
+        difficultyLevel = document.getElementById('difficulty').value;
+        document.getElementById('quizSection').style.display = 'block';
+        document.getElementById('endMessage').style.display = 'none';
+        document.getElementById('endButtons').style.display = 'none';
+
+        document.getElementById('difficulty').disabled = true;
+        document.querySelector('button[onclick="startQuiz();"]').disabled = true;
+
+        questionsAnswered = 0;
+        correctAnswers = 0;
+
+        generateMathQuestion();
+        updateProgress();
+    }
+
+    // Generate a new math question based on difficulty
     function generateMathQuestion() {
-        var difficulty = document.getElementById('difficulty').value;
+        if (questionsAnswered >= maxQuestions) {
+            endQuiz();
+            return;
+        }
+
         var num1, num2, operator;
 
         // Choose numbers and operator based on difficulty level
-        if (difficulty === "easy") {
+        if (difficultyLevel === "easy") {
             num1 = Math.floor(Math.random() * 10) + 1;
             num2 = Math.floor(Math.random() * 10) + 1;
             operator = Math.random() < 0.5 ? "+" : "-";
-        } else if (difficulty === "medium") {
+        } else if (difficultyLevel === "medium") {
             num1 = Math.floor(Math.random() * 20) + 1;
             num2 = Math.floor(Math.random() * 20) + 1;
             operator = Math.random() < 0.33 ? "+" : (Math.random() < 0.5 ? "-" : "*");
@@ -118,11 +155,11 @@
         document.getElementById('result').innerHTML = '';
     }
 
+    // Check if the user's answer is correct
     function checkAnswer() {
         var answer = parseInt(document.getElementById('answer').value);
         var correctAnswer;
 
-        
         if (currentQuestion.operator === "+") {
             correctAnswer = currentQuestion.num1 + currentQuestion.num2;
         } else if (currentQuestion.operator === "-") {
@@ -131,8 +168,8 @@
             correctAnswer = currentQuestion.num1 * currentQuestion.num2;
         }
 
-        
         if (answer === correctAnswer) {
+            correctAnswers++;
             document.getElementById('result').innerHTML = "Correct!";
             document.getElementById('result').classList.add("correct");
             document.getElementById('result').classList.remove("incorrect");
@@ -141,6 +178,52 @@
             document.getElementById('result').classList.add("incorrect");
             document.getElementById('result').classList.remove("correct");
         }
+
+        questionsAnswered++;
+        updateProgress();
+
+        if (questionsAnswered < maxQuestions) {
+            generateMathQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    // Update progress to show how many questions the user has answered out of 5
+    function updateProgress() {
+        document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
+    }
+
+    // End the quiz and show the results
+    function endQuiz() {
+        document.getElementById('quizSection').style.display = 'none';
+        document.getElementById('endMessage').style.display = 'block';
+
+        if (correctAnswers === maxQuestions) {
+            document.getElementById('endMessage').innerHTML = `Félicitations! Vous avez répondu à toutes les questions correctement!`;
+        } else {
+            document.getElementById('endMessage').innerHTML = `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
+        }
+
+        document.getElementById('endButtons').style.display = 'block';
+        document.getElementById('endButtons').innerHTML = `
+            <button onclick="restartQuiz();">Recommencer le quiz</button>
+            <button onclick="goHome();">Retour à l'accueil</button>
+        `;
+    }
+
+    // Restart the quiz
+    function restartQuiz() {
+        document.getElementById('quizSection').style.display = 'none';
+        document.getElementById('difficulty').disabled = false;
+        document.querySelector('button[onclick="startQuiz();"]').disabled = false;
+        document.getElementById('endMessage').style.display = 'none';
+        document.getElementById('endButtons').style.display = 'none';
+    }
+
+    // Go back to the homepage
+    function goHome() {
+        window.location.href = "index.html"; // Change this to the actual home page URL
     }
 </script>
 
