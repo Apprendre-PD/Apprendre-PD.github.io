@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprendre-PD</title>
+    <title>Quiz Mathématique pour 3ème année</title>
     <style>
         body {
             background-image: url("image/pixelcut-export.jpeg");
@@ -143,65 +143,48 @@
         }
 
         currentQuestion = { num1, num2, operator };
-        document.getElementById('question').innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`;
+        document.getElementById('question').innerHTML = Quelle est la réponse de ${num1} ${operator} ${num2}?;
         document.getElementById('answer').value = '';
         document.getElementById('result').innerHTML = '';
     }
-    
-// Function to validate input and enable/disable the submit button
-function validateInput() {
-    var answerInput = document.getElementById('answer').value;
-    var submitBtn = document.getElementById('submitBtn');
 
-    // Enable the button only if the input is not empty and is a valid number
-    if (answerInput.trim() !== '' && !isNaN(answerInput)) {
-        submitBtn.disabled = false; // Enable the button
-    } else {
-        submitBtn.disabled = true; // Disable the button
+    function checkAnswer() {
+        var answer = parseFloat(document.getElementById('answer').value);
+        var correctAnswer;
+
+        if (currentQuestion.operator === "+") {
+            correctAnswer = currentQuestion.num1 + currentQuestion.num2;
+        } else if (currentQuestion.operator === "-") {
+            correctAnswer = currentQuestion.num1 - currentQuestion.num2;
+        } else if (currentQuestion.operator === "*") {
+            correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+        } else if (currentQuestion.operator === "/") {
+            correctAnswer = currentQuestion.num1 / currentQuestion.num2;
+        }
+
+        if (answer === correctAnswer) {
+            correctAnswers++;
+            document.getElementById('result').innerHTML = "Correct!";
+            document.getElementById('result').classList.add("correct");
+            document.getElementById('result').classList.remove("incorrect");
+        } else {
+            document.getElementById('result').innerHTML = Incorrect! La bonne réponse était ${correctAnswer}.;
+            document.getElementById('result').classList.add("incorrect");
+            document.getElementById('result').classList.remove("correct");
+        }
+
+        questionsAnswered++;
+        updateProgress();
+
+        if (questionsAnswered < maxQuestions) {
+            generateMathQuestion();
+        } else {
+            endQuiz();
+        }
     }
-}
-
-function checkAnswer() {
-    var answer = parseFloat(document.getElementById('answer').value);
-    var correctAnswer;
-
-    if (currentQuestion.operator === "+") {
-        correctAnswer = currentQuestion.num1 + currentQuestion.num2;
-    } else if (currentQuestion.operator === "-") {
-        correctAnswer = currentQuestion.num1 - currentQuestion.num2;
-    } else if (currentQuestion.operator === "*") {
-        correctAnswer = currentQuestion.num1 * currentQuestion.num2;
-    } else if (currentQuestion.operator === "/") {
-        correctAnswer = currentQuestion.num1 / currentQuestion.num2;
-    }
-
-    if (answer === correctAnswer) {
-        correctAnswers++;
-        document.getElementById('result').innerHTML = "Correct!";
-        document.getElementById('result').classList.add("correct");
-        document.getElementById('result').classList.remove("incorrect");
-    } else {
-        document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
-        document.getElementById('result').classList.add("incorrect");
-        document.getElementById('result').classList.remove("correct");
-    }
-
-    questionsAnswered++;
-    updateProgress();
-
-    // Reset input and disable the button for the next question
-    document.getElementById('answer').value = '';
-    document.getElementById('submitBtn').disabled = true;
-
-    if (questionsAnswered < maxQuestions) {
-        generateMathQuestion();
-    } else {
-        endQuiz();
-    }
-}
 
     function updateProgress() {
-        document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
+        document.getElementById('progress').innerHTML = Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.;
     }
 
     function endQuiz() {
@@ -210,14 +193,14 @@ function checkAnswer() {
 
         document.getElementById('endMessage').innerHTML = 
             correctAnswers === maxQuestions
-            ? `Félicitations! Vous avez répondu à toutes les questions correctement!`
-            : `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
+            ? Félicitations! Vous avez répondu à toutes les questions correctement!
+            : Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.;
 
         document.getElementById('endButtons').style.display = 'block';
-        document.getElementById('endButtons').innerHTML = `
+        document.getElementById('endButtons').innerHTML = 
             <button onclick="restartQuiz();">Recommencer le quiz</button>
             <button onclick="goHome();">Retour à l'accueil</button>
-        `;
+        ;
     }
 
     function restartQuiz() {
