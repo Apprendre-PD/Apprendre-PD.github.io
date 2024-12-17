@@ -26,15 +26,6 @@
             margin-top: 105px;
         }
 
-        .footer {
-            position: absolute;
-            bottom: 100px;
-            width: 500px;
-            margin: auto;
-            background-color: white;
-            height: 40px;
-        }
-
         h2 {
             font-size: 24px;
             margin-bottom: 20px;
@@ -78,16 +69,16 @@
 <body>
 
 <div class="paper">
+  
     <h2>Quiz Mathématique pour 3ème année</h2>
+	
     <p>Clique sur le difficulter que tu veut et après clique sur le bouton vert pour générer un question de maths</p>
-    <div class="footer">
     <label for="difficulties">Sélectionnez la difficulté:</label>
     <select id="difficulty" name="difficulty">
         <option value="easy">Facile</option>
         <option value="medium">Moyenne</option>
         <option value="hard">Difficile</option>
     </select>
-</div>
     <p><button onclick="generateMathQuestion();">Générer une question</button></p>
 
     <div id="question"></div>
@@ -95,6 +86,7 @@
 
     <input type="number" id="answer" placeholder="Entrez votre réponse" />
     <button onclick="checkAnswer();">Soumettre la réponse</button>
+
 </div>
 
 
@@ -130,7 +122,7 @@
         var answer = parseInt(document.getElementById('answer').value);
         var correctAnswer;
 
-        // Calculate the correct answer based on the operator
+        
         if (currentQuestion.operator === "+") {
             correctAnswer = currentQuestion.num1 + currentQuestion.num2;
         } else if (currentQuestion.operator === "-") {
@@ -139,7 +131,7 @@
             correctAnswer = currentQuestion.num1 * currentQuestion.num2;
         }
 
-        // Check if the answer is correct
+        
         if (answer === correctAnswer) {
             document.getElementById('result').innerHTML = "Correct!";
             document.getElementById('result').classList.add("correct");
