@@ -43,12 +43,6 @@
             border-radius: 5px;
         }
 
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
         select {
             padding: 5px;
             margin: 5px;
@@ -105,10 +99,8 @@
     var questionsAnswered = 0;
     var correctAnswers = 0;
     var maxQuestions = 5;
-    var quizStarted = false;
     var difficultyLevel = '';
 
-    // Start the quiz by hiding the level selection and showing the quiz section
     function startQuiz() {
         difficultyLevel = document.getElementById('difficulty').value;
         document.getElementById('quizSection').style.display = 'block';
@@ -125,7 +117,6 @@
         updateProgress();
     }
 
-    // Generate a new math question based on difficulty
     function generateMathQuestion() {
         if (questionsAnswered >= maxQuestions) {
             endQuiz();
@@ -134,19 +125,21 @@
 
         var num1, num2, operator;
 
-        // Choose numbers and operator based on difficulty level
-        if (difficultyLevel === "easy") {
+        if (difficultyLevel === "easy") { // Facile: Addition and Subtraction
             num1 = Math.floor(Math.random() * 10) + 1;
             num2 = Math.floor(Math.random() * 10) + 1;
             operator = Math.random() < 0.5 ? "+" : "-";
-        } else if (difficultyLevel === "medium") {
+        } else if (difficultyLevel === "medium") { // Moyenne: Multiplication only
+            num1 = Math.floor(Math.random() * 12) + 1;
+            num2 = Math.floor(Math.random() * 12) + 1;
+            operator = "*";
+        } else { // Difficile: Multiplication and Division
             num1 = Math.floor(Math.random() * 20) + 1;
-            num2 = Math.floor(Math.random() * 20) + 1;
-            operator = Math.random() < 0.33 ? "+" : (Math.random() < 0.5 ? "-" : "*");
-        } else { // hard
-            num1 = Math.floor(Math.random() * 50) + 1;
-            num2 = Math.floor(Math.random() * 50) + 1;
-            operator = Math.random() < 0.25 ? "+" : (Math.random() < 0.5 ? "-" : "*");
+            num2 = Math.floor(Math.random() * 10) + 1;
+            operator = Math.random() < 0.5 ? "*" : "/";
+            if (operator === "/") {
+                num1 = num1 * num2; // Ensure division results in an integer
+            }
         }
 
         currentQuestion = { num1, num2, operator };
@@ -155,9 +148,8 @@
         document.getElementById('result').innerHTML = '';
     }
 
-    // Check if the user's answer is correct
     function checkAnswer() {
-        var answer = parseInt(document.getElementById('answer').value);
+        var answer = parseFloat(document.getElementById('answer').value);
         var correctAnswer;
 
         if (currentQuestion.operator === "+") {
@@ -166,6 +158,8 @@
             correctAnswer = currentQuestion.num1 - currentQuestion.num2;
         } else if (currentQuestion.operator === "*") {
             correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+        } else if (currentQuestion.operator === "/") {
+            correctAnswer = currentQuestion.num1 / currentQuestion.num2;
         }
 
         if (answer === correctAnswer) {
@@ -189,21 +183,18 @@
         }
     }
 
-    // Update progress to show how many questions the user has answered out of 5
     function updateProgress() {
         document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
     }
 
-    // End the quiz and show the results
     function endQuiz() {
         document.getElementById('quizSection').style.display = 'none';
         document.getElementById('endMessage').style.display = 'block';
 
-        if (correctAnswers === maxQuestions) {
-            document.getElementById('endMessage').innerHTML = `Félicitations! Vous avez répondu à toutes les questions correctement!`;
-        } else {
-            document.getElementById('endMessage').innerHTML = `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
-        }
+        document.getElementById('endMessage').innerHTML = 
+            correctAnswers === maxQuestions
+            ? `Félicitations! Vous avez répondu à toutes les questions correctement!`
+            : `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
 
         document.getElementById('endButtons').style.display = 'block';
         document.getElementById('endButtons').innerHTML = `
@@ -212,7 +203,6 @@
         `;
     }
 
-    // Restart the quiz
     function restartQuiz() {
         document.getElementById('quizSection').style.display = 'none';
         document.getElementById('difficulty').disabled = false;
@@ -221,9 +211,8 @@
         document.getElementById('endButtons').style.display = 'none';
     }
 
-    // Go back to the homepage
     function goHome() {
-        window.location.href = "index.html"; // Change this to the actual home page URL
+        window.location.href = "index.html";
     }
 </script>
 
