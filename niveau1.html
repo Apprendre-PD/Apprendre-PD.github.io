@@ -101,7 +101,9 @@
         <option value="triangle">Triangle</option>
     </select>
 </div>
+<p><button onclick="getRandomImage()">Cliquez ici pour une image</button></p>
 <script>
+    
     function getRandomImage() {
        
         var randomImage = new Array();
@@ -114,7 +116,9 @@
         
         var number = Math.floor(Math.random() * randomImage.length); 
         document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
+        randomImage.splice(number); 
     }
+    
     
 </script>
 
