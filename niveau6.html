@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niveau#1 du jeu éducatif élémentaire</title>
+    <title>Apprendre-PD</title>
     <style>
         body {
             background-image: url("image/pixelcut-export.jpeg");
@@ -16,6 +16,7 @@
             justify-content: center;
             align-items: center;
             background-attachment: fixed;
+            flex-direction: column;
         }
 
         .paper {
@@ -115,12 +116,32 @@
             color: #555;
         }
 
+        /* Heart Container Style */
+        .hearts-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/heart.png');
+            background-size: cover;
+        }
+
+        .heart.empty {
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/heart-broken.png');
+        }
+
     </style>
 </head>
 <body>
 
 <div class="paper">
-    <h2>Niveau#1 du jeu éducatif élémentaire</h2>
+    <h2>1 Année</h2>
     <div id="result"></div>
 
     <!-- Show question number and progress -->
@@ -134,14 +155,14 @@
     <div class="footer">
         <label for="couleurs">Quelle couleur est l'objet:</label>
         <select id="couleur" name="couleur">
-            <option value="Rouge">Rouge (Cercle)</option>
-            <option value="Bleu">Bleu (Carré)</option>
-            <option value="Mauve">Mauve (Trapèze)</option>
-            <option value="Vert">Vert (Losange)</option>
-            <option value="Orange">Orange (Triangle)</option>
+            <option value="Rouge">Rouge</option>
+            <option value="Bleu">Bleu</option>
+            <option value="Mauve">Mauve</option>
+            <option value="Vert">Vert</option>
+            <option value="Orange">Orange</option>
         </select>
 
-        <label for="formes">Quelle fig:</label>
+        <label for="formes">Quelle figure:</label>
         <select id="formes" name="formes">
             <option value="cercle">Cercle</option>
             <option value="carre">Carré</option>
@@ -158,6 +179,13 @@
     <div class="message" id="questionMessage"></div>
 </div>
 
+<!-- Heart container -->
+<div class="hearts-container" id="heartsContainer">
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+</div>
+
 <!-- End quiz and action buttons -->
 <div class="end-container" id="endButtons">
     <div id="endMessage"></div>
@@ -170,28 +198,38 @@
     var maxQuestions = 5;
     var correctAnswers = 0;
     var questionsAnswered = 0;
+    var lives = 3; // Initial number of hearts
 
     // Define the correct answers and their corresponding images
     var questions = [
-        { image: "https://raw.githubusercontent.com/Apprendre-PD/Apprendre-PD.github.io/main/image/a1.jpg", couleur: "Rouge", forme: "cercle" },    // Red Circle
-        { image: "https://raw.githubusercontent.com/Apprendre-PD/Apprendre-PD.github.io/main/image/a2.jpg", couleur: "Bleu", forme: "carre" },     // Blue Square
-        { image: "https://raw.githubusercontent.com/Apprendre-PD/Apprendre-PD.github.io/main/image/a3.jpg", couleur: "Mauve", forme: "trapeze" },  // Purple Trapezoid
-        { image: "https://raw.githubusercontent.com/Apprendre-PD/Apprendre-PD.github.io/main/image/a4.jpg", couleur: "Vert", forme: "Lozenge" },   // Green Lozenge
-        { image: "https://raw.githubusercontent.com/Apprendre-PD/Apprendre-PD.github.io/main/image/a5.jpg", couleur: "Orange", forme: "triangle" } // Orange Triangle
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a1.jpg?raw=true", couleur: "Rouge", forme: "cercle" },    // Red Circle
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a2.jpg?raw=true", couleur: "Bleu", forme: "carre" },     // Blue Square
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a3.jpg?raw=true", couleur: "Mauve", forme: "trapeze" },  // Purple Trapezoid
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a4.jpg?raw=true", couleur: "Vert", forme: "Lozenge" },   // Green Lozenge
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a5.jpg?raw=true", couleur: "Orange", forme: "triangle" } // Orange Triangle
     ];
 
     // Display a random image and store the current index
     function getRandomImage() {
-        // Get the current question
         var currentQuestion = questions[questionsAnswered];
         document.getElementById('result').innerHTML = '<img src="' + currentQuestion.image + '" alt="Random Image"/>';
 
-        // Store the current question index based on the image
         currentQuestionIndex = questionsAnswered;
 
-        // Update the question number display
         document.getElementById("questionNumber").innerText = questionsAnswered + 1;
-        document.getElementById("totalQuestions").innerText = maxQuestions;  // Display total questions
+        document.getElementById("totalQuestions").innerText = maxQuestions;
+    }
+
+    // Update heart status
+    function updateHearts() {
+        const hearts = document.querySelectorAll('.heart');
+        for (let i = 0; i < hearts.length; i++) {
+            if (i < lives) {
+                hearts[i].classList.remove('empty');
+            } else {
+                hearts[i].classList.add('empty');
+            }
+        }
     }
 
     // Submit the answer for the current question
@@ -199,31 +237,36 @@
         var couleurAnswer = document.getElementById("couleur").value;
         var formeAnswer = document.getElementById("formes").value;
 
-        // Get the correct answer for the current question
         var correctAnswer = questions[currentQuestionIndex];
 
-        // Check if the selected answers are correct
         if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
             correctAnswers++;
             document.getElementById('questionMessage').innerHTML = "Correct! Vous avez choisi la bonne couleur et la bonne forme!";
         } else {
+            lives--;
             document.getElementById('questionMessage').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
+            updateHearts();
         }
 
         questionsAnswered++;
         updateProgress();
 
-        // If all questions are answered, finalize the quiz
-        if (questionsAnswered < maxQuestions) {
-            getRandomImage();  // Load next question
+        if (lives === 0) {
+            finalizeQuiz();
+        } else if (questionsAnswered < maxQuestions) {
+            getRandomImage();
         } else {
-            finalizeQuiz(); // Show the final score
+            finalizeQuiz();
         }
     }
 
     // Finalize the quiz and show the score
     function finalizeQuiz() {
-        document.getElementById('endMessage').innerHTML = `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
+        if (lives === 0) {
+            document.getElementById('endMessage').innerHTML = `Vous avez perdu tous vos coeurs. Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
+        } else {
+            document.getElementById('endMessage').innerHTML = `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
+        }
         document.getElementById('endButtons').style.display = 'block';
     }
 
@@ -231,26 +274,28 @@
     function restartQuiz() {
         correctAnswers = 0;
         questionsAnswered = 0;
+        lives = 3;
         document.getElementById('endButtons').style.display = 'none';
         document.getElementById('questionMessage').innerHTML = "";
-        getRandomImage();  // Start the first question
+        updateHearts();
+        getRandomImage();
     }
 
     // Redirect to the home page
     function goToHomePage() {
-        window.location.href = "index.html"; // Change to the home page URL as needed
+        window.location.href = "index.html";
     }
 
-    // Update the progress text showing the number of correct answers
+    // Update the progress text
     function updateProgress() {
         document.getElementById('progress').innerHTML = `Question ${questionsAnswered + 1} sur ${maxQuestions}`;
     }
 
-    // Start the quiz by displaying the first question
+    // Start the quiz
     window.onload = function() {
+        updateHearts();
         getRandomImage();
     }
-
 </script>
 
 </body>
