@@ -3,137 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprendre-PD</title>
+    <title>Quiz d'Image</title>
     <style>
         body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-attachment: fixed;
+            height: 100vh;
+            background-color: #f2f2f2;
         }
 
-        .paper {
+        .container {
             background-color: white;
-            width: 500px;
-            height: auto;
-            min-height: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 400px;
             text-align: center;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 50px;
             position: relative;
         }
 
-        .footer {
-            width: 500px;
-            margin: auto;
-            background-color: white;
-            padding: 10px;
-            text-align: center;
+        h1 {
+            margin: 10px 0;
+            font-size: 2.5rem;
         }
 
-        h2 {
+        .hearts {
+            position: absolute;
+            top: 10px;
+            right: 20px;
             font-size: 24px;
-            margin-bottom: 20px;
+            color: red;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
+        .image-container {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid black;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-right: 10px;
         }
 
         select {
             padding: 5px;
-            margin: 5px;
-            font-size: 16px;
+            font-size: 1rem;
+            margin-right: 20px;
         }
 
-        #result img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 450px;
-            height: 225px;
-            border-style: solid;
-            border-width: 4px;
-            border-color: black;
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
-        .réponse {
-            margin-top: 20px;
+        button:hover {
+            background-color: #45a049;
         }
 
         .message {
-            text-align: center;
-            font-size: 20px;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: red;
+        }
+
+        .game-over {
+            display: none;
             margin-top: 20px;
         }
 
-        .progress {
-            font-size: 18px;
-            margin-top: 10px;
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
         }
-
-        .question-status {
-            font-size: 20px;
-            margin-top: 10px;
-        }
-
-        #endMessage {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        #endButtons button {
-            margin-top: 10px;
-        }
-
-        .end-container {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 500px;
-        }
-
-        .footer .message {
-            font-size: 18px;
-            color: #555;
-        }
-
     </style>
 </head>
 <body>
 
-<div class="paper">
-    <h2>Quiz d'image pour les 1 Années</h2>
-    <div id="result"></div>
-<a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison"  width="50" height="50"></a>
-    <!-- Show question number and progress -->
-    <div id="progress" class="progress">
-        Question <span id="questionNumber">1</span> sur <span id="totalQuestions">5</span>
+<div class="container">
+    <div class="home-button">
+        <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
+    </div>
+    <div class="hearts" id="hearts">❤️❤️❤️</div>
+    <h1>Text</h1>
+
+    <div class="image-container" id="image-container">
+        Image
     </div>
 
-    <div id="questionStatus" class="question-status"></div>
+    <p>Question <span id="currentQuestion">1</span> sur 5</p>
 
-    <!-- Display the answers and options -->
-    <div class="footer">
-        <label for="couleurs">Quelle couleur est l'objet:</label>
-        <select id="couleur" name="couleur">
+    <div class="options">
+        <label>Quelle couleur est l'objet:</label>
+        <select id="colorSelect">
             <option value="Rouge">Rouge</option>
             <option value="Bleu">Bleu</option>
             <option value="Mauve">Mauve</option>
@@ -141,8 +121,8 @@
             <option value="Orange">Orange</option>
         </select>
 
-        <label for="formes">Quelle figure:</label>
-        <select id="formes" name="formes">
+        <label>Quelle figure:</label>
+        <select id="shapeSelect">
             <option value="cercle">Cercle</option>
             <option value="carre">Carré</option>
             <option value="trapeze">Trapèze</option>
@@ -151,108 +131,90 @@
         </select>
     </div>
 
-    <div class="réponse">
-        <button onclick="submitAnswer()">Soumettre la réponse</button>
+    <button onclick="checkAnswer()">Soumettre la réponse</button>
+    <div class="message" id="message"></div>
+
+    <div class="game-over" id="gameOver">
+        <p>Vous avez perdu toutes vos vies!</p>
+        <button onclick="restartGame()">Recommencer le jeu</button>
+        <button onclick="goHome()">Retour à l'accueil</button>
     </div>
-
-    <div class="message" id="questionMessage"></div>
-</div>
-
-<!-- End quiz and action buttons -->
-<div class="end-container" id="endButtons">
-    <div id="endMessage"></div>
-    <button onclick="restartQuiz()">Recommencer le quiz</button>
-    <button onclick="goToHomePage()">Retour à l'accueil</button>
 </div>
 
 <script>
-    var currentQuestionIndex = 0;
-    var maxQuestions = 5;
-    var correctAnswers = 0;
-    var questionsAnswered = 0;
-
-    // Define the correct answers and their corresponding images
-    var questions = [
-        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a1.jpg?raw=true", couleur: "Rouge", forme: "cercle" },    // Red Circle
-        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a2.jpg?raw=true", couleur: "Bleu", forme: "carre" },     // Blue Square
-        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a3.jpg?raw=true", couleur: "Mauve", forme: "trapeze" },  // Purple Trapezoid
-        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a4.jpg?raw=true", couleur: "Vert", forme: "Lozenge" },   // Green Lozenge
-        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a5.jpg?raw=true", couleur: "Orange", forme: "triangle" } // Orange Triangle
+    const questions = [
+        { image: "https://via.placeholder.com/300x150.png?text=Rouge+Cercle", couleur: "Rouge", forme: "cercle" },
+        { image: "https://via.placeholder.com/300x150.png?text=Bleu+Carre", couleur: "Bleu", forme: "carre" },
+        { image: "https://via.placeholder.com/300x150.png?text=Mauve+Trapeze", couleur: "Mauve", forme: "trapeze" },
+        { image: "https://via.placeholder.com/300x150.png?text=Vert+Losange", couleur: "Vert", forme: "Lozenge" },
+        { image: "https://via.placeholder.com/300x150.png?text=Orange+Triangle", couleur: "Orange", forme: "triangle" }
     ];
 
-    // Display a random image and store the current index
-    function getRandomImage() {
-        // Get the current question
-        var currentQuestion = questions[questionsAnswered];
-        document.getElementById('result').innerHTML = '<img src="' + currentQuestion.image + '" alt="Random Image"/>';
+    let currentQuestionIndex = 0;
+    let hearts = 3;
 
-        // Store the current question index based on the image
-        currentQuestionIndex = questionsAnswered;
-
-        // Update the question number display
-        document.getElementById("questionNumber").innerText = questionsAnswered + 1;
-        document.getElementById("totalQuestions").innerText = maxQuestions;  // Display total questions
+    function loadQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        document.getElementById("image-container").innerHTML = `<img src="${currentQuestion.image}" alt="Image" width="300" height="150"/>`;
+        document.getElementById("currentQuestion").innerText = currentQuestionIndex + 1;
+        document.getElementById("message").innerText = "";
     }
 
-    // Submit the answer for the current question
-    function submitAnswer() {
-        var couleurAnswer = document.getElementById("couleur").value;
-        var formeAnswer = document.getElementById("formes").value;
+    function checkAnswer() {
+        const color = document.getElementById("colorSelect").value;
+        const shape = document.getElementById("shapeSelect").value;
+        const currentQuestion = questions[currentQuestionIndex];
 
-        // Get the correct answer for the current question
-        var correctAnswer = questions[currentQuestionIndex];
-
-        // Check if the selected answers are correct
-        if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
-            correctAnswers++;
-            document.getElementById('questionMessage').innerHTML = "Correct! Vous avez choisi la bonne couleur et la bonne forme!";
+        if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
+            document.getElementById("message").innerText = "Bonne réponse!";
+            document.getElementById("message").style.color = "green";
         } else {
-            document.getElementById('questionMessage').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
+            hearts--;
+            updateHearts();
+            document.getElementById("message").innerText = `Incorrect! La réponse était ${currentQuestion.couleur} et ${currentQuestion.forme}.`;
+            if (hearts === 0) {
+                endGame();
+                return;
+            }
         }
 
-        questionsAnswered++;
-        updateProgress();
-
-        // If all questions are answered, finalize the quiz
-        if (questionsAnswered < maxQuestions) {
-            getRandomImage();  // Load next question
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
         } else {
-            finalizeQuiz(); // Show the final score
+            endGame(true);
         }
     }
 
-    // Finalize the quiz and show the score
-    function finalizeQuiz() {
-        document.getElementById('endMessage').innerHTML = `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
-
-        document.getElementById('endButtons').style.display = 'block';
+    function updateHearts() {
+        const heartsDisplay = "❤️".repeat(hearts);
+        document.getElementById("hearts").innerText = heartsDisplay;
     }
 
-    // Restart the quiz
-    function restartQuiz() {
-        correctAnswers = 0;
-        questionsAnswered = 0;
-        document.getElementById('endButtons').style.display = 'none';
-        document.getElementById('questionMessage').innerHTML = "";
-        getRandomImage();  // Start the first question
+    function endGame(won = false) {
+        const gameOver = document.getElementById("gameOver");
+        const message = document.getElementById("message");
+        if (won) {
+            message.innerText = "Félicitations! Vous avez terminé le quiz!";
+            message.style.color = "green";
+        } else {
+            gameOver.style.display = "block";
+        }
     }
 
-    // Redirect to the home page
-    function goToHomePage() {
-        window.location.href = "index.html"; // Change to the home page URL as needed
+    function restartGame() {
+        currentQuestionIndex = 0;
+        hearts = 3;
+        updateHearts();
+        document.getElementById("gameOver").style.display = "none";
+        loadQuestion();
     }
 
-    // Update the progress text showing the number of correct answers
-    function updateProgress() {
-        document.getElementById('progress').innerHTML = `Question ${questionsAnswered + 1} sur ${maxQuestions}`;
+    function goHome() {
+        window.location.href = "index.html";
     }
 
-    // Start the quiz by displaying the first question
-    window.onload = function() {
-        getRandomImage();
-    }
-
+    window.onload = loadQuestion;
 </script>
-
 </body>
 </html>
