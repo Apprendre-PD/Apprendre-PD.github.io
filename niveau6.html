@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz d'Image</title>
+    <title>Quiz Géographie - Provinces du Canada</title>
     <style>
         body {
+            background-image: url('https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/pixelcut-export.jpeg?raw=true');
+            background-size: cover;
+            background-position: center;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -13,54 +16,53 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f2f2f2;
         }
 
         .container {
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
             text-align: center;
-            position: relative;
+            background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
         }
 
         h1 {
             margin: 10px 0;
-            font-size: 2.5rem;
+            font-size: 2rem;
+            color: #333;
         }
 
-        .hearts {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 24px;
-            color: red;
+        .question {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #555;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .image-container {
-            width: 80%;
-            margin: 20px auto;
-            border: 2px solid black;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .options {
+        .map-container {
+            position: relative;
             margin: 20px 0;
         }
 
-        label {
-            font-size: 1rem;
-            margin-right: 10px;
+        .map-container img {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        select {
-            padding: 5px;
+        input[type="text"] {
+            padding: 10px;
             font-size: 1rem;
-            margin-right: 20px;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
         }
 
         button {
@@ -71,6 +73,7 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -78,143 +81,119 @@
         }
 
         .message {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            color: red;
+            font-size: 1rem;
+            margin: 15px 0;
         }
 
-        .game-over {
-            display: none;
+        .score {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .end-buttons {
             margin-top: 20px;
         }
 
-        .home-button {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            cursor: pointer;
+        .end-buttons button {
+            margin: 5px;
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="home-button">
-        <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
+    <h1>Quiz : Provinces du Canada</h1>
+    <p class="question" id="question">Question ici</p>
+    <div class="map-container">
+        <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
     </div>
-    <div class="hearts" id="hearts">❤️❤️❤️</div>
-    <h1>Text</h1>
-
-    <div class="image-container" id="image-container">
-        Image
-    </div>
-
-    <p>Question <span id="currentQuestion">1</span> sur 5</p>
-
-    <div class="options">
-        <label>Quelle couleur est l'objet:</label>
-        <select id="colorSelect">
-            <option value="Rouge">Rouge</option>
-            <option value="Bleu">Bleu</option>
-            <option value="Mauve">Mauve</option>
-            <option value="Vert">Vert</option>
-            <option value="Orange">Orange</option>
-        </select>
-
-        <label>Quelle figure:</label>
-        <select id="shapeSelect">
-            <option value="cercle">Cercle</option>
-            <option value="carre">Carré</option>
-            <option value="trapeze">Trapèze</option>
-            <option value="Lozenge">Losange</option>
-            <option value="triangle">Triangle</option>
-        </select>
-    </div>
-
-    <button onclick="checkAnswer()">Soumettre la réponse</button>
+    <input type="text" id="answerInput" placeholder="Écrivez le nom de la province ici">
+    <button onclick="checkAnswer()">Soumettre</button>
     <div class="message" id="message"></div>
-
-    <div class="game-over" id="gameOver">
-        <p>Vous avez perdu toutes vos vies!</p>
-        <button onclick="restartGame()">Recommencer le jeu</button>
+    <div class="score" id="score"></div>
+    <div class="end-buttons" id="endButtons" style="display: none;">
+        <button onclick="restartQuiz()">Recommencer le quiz</button>
         <button onclick="goHome()">Retour à l'accueil</button>
     </div>
 </div>
 
 <script>
-    const questions = [
-        { image: "https://via.placeholder.com/300x150.png?text=Rouge+Cercle", couleur: "Rouge", forme: "cercle" },
-        { image: "https://via.placeholder.com/300x150.png?text=Bleu+Carre", couleur: "Bleu", forme: "carre" },
-        { image: "https://via.placeholder.com/300x150.png?text=Mauve+Trapeze", couleur: "Mauve", forme: "trapeze" },
-        { image: "https://via.placeholder.com/300x150.png?text=Vert+Losange", couleur: "Vert", forme: "Lozenge" },
-        { image: "https://via.placeholder.com/300x150.png?text=Orange+Triangle", couleur: "Orange", forme: "triangle" }
+    const provinces = [
+        { number: 1, name: "Colombie-Britannique", question: "Quelle province est désignée par le numéro 1 ?" },
+        { number: 2, name: "Alberta", question: "Quelle province est désignée par le numéro 2 ?" },
+        { number: 3, name: "Saskatchewan", question: "Quelle province est désignée par le numéro 3 ?" },
+        { number: 4, name: "Manitoba", question: "Quelle province est désignée par le numéro 4 ?" },
+        { number: 5, name: "Ontario", question: "Quelle province est désignée par le numéro 5 ?" },
+        { number: 6, name: "Québec", question: "Quelle province est désignée par le numéro 6 ?" },
+        { number: 7, name: "Nouvelle-Écosse", question: "Quelle province est désignée par le numéro 7 ?" },
+        { number: 8, name: "Nouveau-Brunswick", question: "Quelle province est désignée par le numéro 8 ?" },
+        { number: 9, name: "Île-du-Prince-Édouard", question: "Quelle province est désignée par le numéro 9 ?" },
+        { number: 10, name: "Terre-Neuve-et-Labrador", question: "Quelle province est désignée par le numéro 10 ?" },
+        { number: 11, name: "Territoires du Nord-Ouest", question: "Quelle province est désignée par le numéro 11 ?" },
+        { number: 12, name: "Yukon", question: "Quelle province est désignée par le numéro 12 ?" },
+        { number: 13, name: "Nunavut", question: "Quelle province est désignée par le numéro 13 ?" }
     ];
 
-    let currentQuestionIndex = 0;
-    let hearts = 3;
+    let currentProvinceIndex = 0;
+    let score = 0;
 
-    function loadQuestion() {
-        const currentQuestion = questions[currentQuestionIndex];
-        document.getElementById("image-container").innerHTML = `<img src="${currentQuestion.image}" alt="Image" width="300" height="150"/>`;
-        document.getElementById("currentQuestion").innerText = currentQuestionIndex + 1;
+    function loadProvince() {
+        const province = provinces[currentProvinceIndex];
+        document.getElementById("question").innerText = province.question;
         document.getElementById("message").innerText = "";
+        document.getElementById("answerInput").value = "";
+        updateScore();
     }
 
     function checkAnswer() {
-        const color = document.getElementById("colorSelect").value;
-        const shape = document.getElementById("shapeSelect").value;
-        const currentQuestion = questions[currentQuestionIndex];
+        const userAnswer = document.getElementById("answerInput").value.trim();
+        const correctAnswer = provinces[currentProvinceIndex].name;
 
-        if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
             document.getElementById("message").innerText = "Bonne réponse!";
             document.getElementById("message").style.color = "green";
+            score++;
         } else {
-            hearts--;
-            updateHearts();
-            document.getElementById("message").innerText = `Incorrect! La réponse était ${currentQuestion.couleur} et ${currentQuestion.forme}.`;
-            if (hearts === 0) {
-                endGame();
-                return;
-            }
+            document.getElementById("message").innerText = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+            document.getElementById("message").style.color = "red";
         }
 
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
+        currentProvinceIndex++;
+        if (currentProvinceIndex < provinces.length) {
+            setTimeout(loadProvince, 1000);
         } else {
-            endGame(true);
+            endQuiz();
         }
     }
 
-    function updateHearts() {
-        const heartsDisplay = "❤️".repeat(hearts);
-        document.getElementById("hearts").innerText = heartsDisplay;
+    function updateScore() {
+        document.getElementById("score").innerText = `Score: ${score} / ${provinces.length}`;
     }
 
-    function endGame(won = false) {
-        const gameOver = document.getElementById("gameOver");
-        const message = document.getElementById("message");
-        if (won) {
-            message.innerText = "Félicitations! Vous avez terminé le quiz!";
-            message.style.color = "green";
-        } else {
-            gameOver.style.display = "block";
-        }
+    function endQuiz() {
+        document.getElementById("question").innerText = "Quiz terminé!";
+        document.getElementById("message").innerText = `Vous avez obtenu ${score} sur ${provinces.length}.`;
+        document.getElementById("answerInput").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("endButtons").style.display = "block";
     }
 
-    function restartGame() {
-        currentQuestionIndex = 0;
-        hearts = 3;
-        updateHearts();
-        document.getElementById("gameOver").style.display = "none";
-        loadQuestion();
+    function restartQuiz() {
+        currentProvinceIndex = 0;
+        score = 0;
+        document.getElementById("answerInput").style.display = "block";
+        document.querySelector("button").style.display = "block";
+        document.getElementById("endButtons").style.display = "none";
+        loadProvince();
     }
 
     function goHome() {
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Update with the actual homepage link
     }
 
-    window.onload = loadQuestion;
+    window.onload = function () {
+        loadProvince();
+    };
 </script>
 </body>
 </html>
