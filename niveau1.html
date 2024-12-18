@@ -129,9 +129,9 @@
         var number = Math.floor(Math.random() * randomImage.length); 
         document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
        
-        const index = Array.indexOf(5);
+        const index = randomImage.indexOf(number);
 if (index > -1) {
-  Array.splice(index, 1); 
+  randomImage.splice(index, 1); 
 }
     }
     
