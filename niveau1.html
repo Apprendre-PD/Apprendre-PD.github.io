@@ -125,7 +125,7 @@
         const index = randomImage.indexOf(number);
 if (index > -1) {
   randomImage.splice(index, 1); 
-}
+}}
         function checkAnswer() {
 var maxQuestions==5
             var answer=document.getElementById("couleur")
@@ -139,8 +139,6 @@ var maxQuestions==5
             } else if (number ==3) {
                 correctAnswer = "Mauve"
             }
-            
-
             if (answer === correctAnswer) {
                 correctAnswers++;
                 document.getElementById('result').innerHTML = "Correct!";
