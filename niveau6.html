@@ -1,33 +1,31 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Géographie - Provinces du Canada</title>
     <style>
-             body {
-                  background-image: url("image/pixelcut-export.jpeg");
-                   background-repeat: no-repeat;
-                     background-size: cover;
-                             background-attachment: fixed; 
-            
+        body {
+            background-image: url('https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/pixelcut-export.jpeg?raw=true');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100px;
-            background-color: #f2f2f2;
+            height: 100vh;
         }
 
         .container {
-             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             padding: 20px;
-             width: 500px;
-            height: 550px;
+            width: 500px;
             text-align: center;
-            position: relative;
-            margin-top: 700px;
+            background-color: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
         }
 
         h1 {
@@ -44,6 +42,11 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container {
+            position: relative;
+            margin: 20px 0;
         }
 
         .map-container img {
@@ -77,14 +80,6 @@
             background-color: #45a049;
         }
 
-        .hearts {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: red;
-        }
-
         .message {
             font-size: 1rem;
             margin: 15px 0;
@@ -104,21 +99,16 @@
             margin: 5px;
         }
 
-        .home-button {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            cursor: pointer;
+        .warning {
+            font-size: 1rem;
+            color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="home-button">
-        <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
-    </div>
-    <div class="hearts" id="hearts">❤️❤️❤️</div>
-    <h1>Quiz : Provinces et Territoires du Canada</h1>
+    <h1>Quiz : Provinces du Canada</h1>
     <p class="question" id="question">Question ici</p>
     <div class="map-container">
         <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
@@ -127,6 +117,7 @@
     <button onclick="checkAnswer()">Soumettre</button>
     <div class="message" id="message"></div>
     <div class="score" id="score"></div>
+    <div class="warning" id="warningMessage">Veuillez entrer votre réponse en MAJUSCULES.</div>
     <div class="end-buttons" id="endButtons" style="display: none;">
         <button onclick="restartQuiz()">Recommencer le quiz</button>
         <button onclick="goHome()">Retour à l'accueil</button>
@@ -152,7 +143,6 @@
 
     let currentProvinceIndex = 0;
     let score = 0;
-    let hearts = 3;
 
     function loadProvince() {
         const province = provinces[currentProvinceIndex];
@@ -163,29 +153,23 @@
     }
 
     function checkAnswer() {
-        const userAnswer = document.getElementById("answerInput").value.trim();
-        const correctAnswer = provinces[currentProvinceIndex].name;
+        const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();  // Convert answer to uppercase
+        const correctAnswer = provinces[currentProvinceIndex].name.toUpperCase();  // Ensure the correct answer is also in uppercase
 
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        if (userAnswer === correctAnswer) {
             document.getElementById("message").innerText = "Bonne réponse!";
             document.getElementById("message").style.color = "green";
             score++;
         } else {
-            hearts--;
-            updateHearts();
             document.getElementById("message").innerText = `Incorrect! La bonne réponse était ${correctAnswer}.`;
             document.getElementById("message").style.color = "red";
-            if (hearts === 0) {
-                endQuiz(false);
-                return;
-            }
         }
 
         currentProvinceIndex++;
         if (currentProvinceIndex < provinces.length) {
             setTimeout(loadProvince, 1000);
         } else {
-            endQuiz(true);
+            endQuiz();
         }
     }
 
@@ -193,13 +177,9 @@
         document.getElementById("score").innerText = `Score: ${score} / ${provinces.length}`;
     }
 
-    function updateHearts() {
-        document.getElementById("hearts").innerText = "❤️".repeat(hearts);
-    }
-
-    function endQuiz(won) {
-        document.getElementById("question").innerText = won ? "Félicitations! Vous avez terminé le quiz!" : "Vous avez perdu toutes vos vies!";
-        document.getElementById("message").innerText = `Score final: ${score} / ${provinces.length}.`;
+    function endQuiz() {
+        document.getElementById("question").innerText = "Quiz terminé!";
+        document.getElementById("message").innerText = `Vous avez obtenu ${score} sur ${provinces.length}.`;
         document.getElementById("answerInput").style.display = "none";
         document.querySelector("button").style.display = "none";
         document.getElementById("endButtons").style.display = "block";
@@ -208,22 +188,24 @@
     function restartQuiz() {
         currentProvinceIndex = 0;
         score = 0;
-        hearts = 3;
         document.getElementById("answerInput").style.display = "block";
         document.querySelector("button").style.display = "block";
         document.getElementById("endButtons").style.display = "none";
-        updateHearts();
         loadProvince();
     }
 
     function goHome() {
-        window.location.href = "index.html";
+        window.location.href = "index.html"; // Update with the actual homepage link
     }
 
     window.onload = function () {
         loadProvince();
-        updateHearts();
     };
+
+    // Automatically convert user input to uppercase
+    document.getElementById("answerInput").addEventListener("input", function() {
+        this.value = this.value.toUpperCase();
+    });
 </script>
 </body>
 </html>
