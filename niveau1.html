@@ -21,20 +21,21 @@
         .paper {
             background-color: white;
             width: 500px;
-            height: 550px;
+            height: auto;
+            min-height: 600px;
             text-align: center;
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 105px;
+            margin-top: 50px;
+            position: relative;
         }
 
         .footer {
-            position: absolute;
-            bottom: 125px;
             width: 500px;
             margin: auto;
             background-color: white;
-            height: 40px;
+            padding: 10px;
+            text-align: center;
         }
 
         h2 {
@@ -50,12 +51,7 @@
             color: white;
             border: none;
             border-radius: 5px;
-        }
-
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
+            margin-top: 10px;
         }
 
         select {
@@ -76,8 +72,7 @@
         }
 
         .réponse {
-            bottom: 30px;
-            position: absolute;
+            margin-top: 20px;
         }
 
         .message {
@@ -86,118 +81,177 @@
             margin-top: 20px;
         }
 
+        .progress {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .question-status {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        #endMessage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #endButtons button {
+            margin-top: 10px;
+        }
+
+        .end-container {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 500px;
+        }
+
+        .footer .message {
+            font-size: 18px;
+            color: #555;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="paper">
-    <h2>Niveau 1</h2>
-    <p><button onclick="getRandomImage()">Cliquez ici pour une image</button></p>
+    <h2>Quiz: Apprendre-PD</h2>
+    <div id="result"></div>
 
-    <span id="result"></span>
+    <!-- Show question number and progress -->
+    <div id="progress" class="progress">
+        Question <span id="questionNumber">1</span> sur <span id="totalQuestions">5</span>
+    </div>
+
+    <div id="questionStatus" class="question-status"></div>
+
+    <!-- Display the answers and options -->
+    <div class="footer">
+        <label for="couleurs">Quelle couleur est l'objet:</label>
+        <select id="couleur" name="couleur">
+            <option value="Rouge">Rouge (Cercle)</option>
+            <option value="Bleu">Bleu (Carré)</option>
+            <option value="Mauve">Mauve (Trapèze)</option>
+            <option value="Vert">Vert (Losange)</option>
+            <option value="Orange">Orange (Triangle)</option>
+        </select>
+
+        <label for="formes">Quelle fig:</label>
+        <select id="formes" name="formes">
+            <option value="cercle">Cercle</option>
+            <option value="carre">Carré</option>
+            <option value="trapeze">Trapèze</option>
+            <option value="Lozenge">Losange</option>
+            <option value="triangle">Triangle</option>
+        </select>
+    </div>
+
+    <div class="réponse">
+        <button onclick="submitAnswer()">Soumettre la réponse</button>
+    </div>
+
+    <div class="message" id="questionMessage"></div>
 </div>
 
-<div class="footer">
-    <label for="couleurs">Quelle couleur est l'objet:</label>
-    <select id="couleur" name="couleur">
-        <option value="Rouge">Rouge</option>
-        <option value=Vert">Vert</option>
-        <option value="Bleu">Bleu</option>
-        <option value="Mauve">Mauve</option>
-        <option value="Orange">Mauve</option>
-    </select>
-
-    <label for="formes">Quelle figure:</label>
-    <select id="formes" name="formes">
-        <option value="carré">Carré</option>
-        <option value="cercle">Cercle</option>
-        <option value="trapeze">Trapèze</option>
-        <option value="triangle">Triangle</option>
-        <option value="losange">Losange</option>
-    </select>
-</div>
-
-<div class="réponse">
-    <p><button onclick="checkAnswer()">Soumettre</button></p>
-</div>
-
-<div id="endMessage" class="message"></div>
-<div id="endButtons" class="message" style="display:none;">
+<!-- End quiz and action buttons -->
+<div class="end-container" id="endButtons">
+    <div id="endMessage"></div>
     <button onclick="restartQuiz()">Recommencer le quiz</button>
-    <button onclick="goHome()">Retour à l'accueil</button>
+    <button onclick="goToHomePage()">Retour à l'accueil</button>
 </div>
 
 <script>
     var currentQuestionIndex = 0;
     var maxQuestions = 5;
     var correctAnswers = 0;
-    var answers = [
-        { couleur: "vert", forme: "Lozenge" },
-        { couleur: "Rouge", forme: "cercle" },
-        { couleur: "Bleu", forme: "carre" },
-        { couleur: "Orange", forme: "triangle" },
-        { couleur: "Mauve", forme: "Trapeze" } 
-         
+    var questionsAnswered = 0;
+
+    // Define the correct answers and their corresponding images
+    var questions = [
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a1.jpg?raw=true", couleur: "Rouge", forme: "cercle" },    // Red Circle
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a2.jpg?raw=true", couleur: "Bleu", forme: "carre" },     // Blue Square
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a3.jpg?raw=true", couleur: "Mauve", forme: "trapeze" },  // Purple Trapezoid
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a4.jpg?raw=true", couleur: "Vert", forme: "Lozenge" },   // Green Lozenge
+        { image: "https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/a5.jpg?raw=true", couleur: "Orange", forme: "triangle" } // Orange Triangle
     ];
 
+    // Display a random image and store the current index
     function getRandomImage() {
-        // Display a random image from the array
-        var randomImage = [
-            "image/a1.jpg", "image/a2.jpg", "image/a3.jpg", "image/a4.jpg", "image/a5.jpg"
-        ];
-        var number = Math.floor(Math.random() * randomImage.length);
-        document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
+        // Get the current question
+        var currentQuestion = questions[questionsAnswered];
+        document.getElementById('result').innerHTML = '<img src="' + currentQuestion.image + '" alt="Random Image"/>';
 
-        // Store the current question based on the random number
-        currentQuestionIndex = number;
+        // Store the current question index based on the image
+        currentQuestionIndex = questionsAnswered;
+
+        // Update the question number display
+        document.getElementById("questionNumber").innerText = questionsAnswered + 1;
+        document.getElementById("totalQuestions").innerText = maxQuestions;  // Display total questions
     }
 
-    function checkAnswer() {
+    // Submit the answer for the current question
+    function submitAnswer() {
         var couleurAnswer = document.getElementById("couleur").value;
         var formeAnswer = document.getElementById("formes").value;
 
-        // Compare with the correct answer
-        var correctAnswer = answers[currentQuestionIndex];
+        // Get the correct answer for the current question
+        var correctAnswer = questions[currentQuestionIndex];
 
+        // Check if the selected answers are correct
         if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
             correctAnswers++;
-            document.getElementById('result').innerHTML = "Correct!";
-            document.getElementById('result').classList.add("correct");
-            document.getElementById('result').classList.remove("incorrect");
+            document.getElementById('questionMessage').innerHTML = "Correct! Vous avez choisi la bonne couleur et la bonne forme!";
         } else {
-            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
-            document.getElementById('result').classList.add("incorrect");
-            document.getElementById('result').classList.remove("correct");
+            document.getElementById('questionMessage').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
         }
 
-        currentQuestionIndex++;
-        if (currentQuestionIndex < maxQuestions) {
-            getRandomImage(); // Load next image
+        questionsAnswered++;
+        updateProgress();
+
+        // If all questions are answered, finalize the quiz
+        if (questionsAnswered < maxQuestions) {
+            getRandomImage();  // Load next question
         } else {
-            endQuiz();
+            finalizeQuiz(); // Show the final score
         }
     }
 
-    function endQuiz() {
-        // End the quiz after 5 questions
-        document.getElementById('endMessage').innerHTML = correctAnswers === maxQuestions
-            ? "Bravo! Vous avez répondu correctement à toutes les questions!"
-            : `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
+    // Finalize the quiz and show the score
+    function finalizeQuiz() {
+        document.getElementById('endMessage').innerHTML = `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
 
         document.getElementById('endButtons').style.display = 'block';
     }
 
+    // Restart the quiz
     function restartQuiz() {
         correctAnswers = 0;
-        currentQuestionIndex = 0;
-        document.getElementById('endMessage').innerHTML = "";
+        questionsAnswered = 0;
         document.getElementById('endButtons').style.display = 'none';
-        getRandomImage(); // Start the first question
+        document.getElementById('questionMessage').innerHTML = "";
+        getRandomImage();  // Start the first question
     }
 
-    function goHome() {
-        window.location.href = "index.html"; // Redirect to home page (change URL as needed)
+    // Redirect to the home page
+    function goToHomePage() {
+        window.location.href = "index.html"; // Change to the home page URL as needed
     }
+
+    // Update the progress text showing the number of correct answers
+    function updateProgress() {
+        document.getElementById('progress').innerHTML = `Question ${questionsAnswered + 1} sur ${maxQuestions}`;
+    }
+
+    // Start the quiz by displaying the first question
+    window.onload = function() {
+        getRandomImage();
+    }
+
 </script>
 
 </body>
