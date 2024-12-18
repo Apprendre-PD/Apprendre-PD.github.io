@@ -236,33 +236,37 @@ select {
     }
 
     // Submit the answer for the current question
-    function submitAnswer() {
-        var couleurAnswer = document.getElementById("couleur").value;
-        var formeAnswer = document.getElementById("formes").value;
+function submitAnswer() {
+    var couleurAnswer = document.getElementById("couleur").value;
+    var formeAnswer = document.getElementById("formes").value;
 
-        var correctAnswer = questions[currentQuestionIndex];
+    var correctAnswer = questions[currentQuestionIndex];
 
-        if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
-            correctAnswers++;
-            document.getElementById('questionMessage').innerHTML = "Correct! Vous avez choisi la bonne couleur et la bonne forme!";
-        } else {
-            lives--;
-            document.getElementById('questionMessage').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
-            updateHearts();
-        }
-
-        questionsAnswered++;
-        updateProgress();
-
-        if (lives === 0) {
-            finalizeQuiz();
-        } else if (questionsAnswered < maxQuestions) {
-            getRandomImage();
-        } else {
-            finalizeQuiz();
-        }
+    if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
+        correctAnswers++;
+        document.getElementById('questionMessage').innerHTML = "Correct! Vous avez choisi la bonne couleur et la bonne forme!";
+    } else {
+        lives--;
+        document.getElementById('questionMessage').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
+        updateHearts();
     }
 
+    questionsAnswered++;
+
+    if (questionsAnswered < maxQuestions && lives > 0) {
+        getRandomImage();
+        updateProgress();
+    } else {
+        finalizeQuiz();
+    }
+}
+function updateProgress() {
+    if (questionsAnswered < maxQuestions) {
+        document.getElementById('progress').innerHTML = `Question ${questionsAnswered + 1} sur ${maxQuestions}`;
+    } else {
+        document.getElementById('progress').innerHTML = `Quiz terminé !`;
+    }
+}
     // Finalize the quiz and show the score
     function finalizeQuiz() {
         if (lives === 0) {
