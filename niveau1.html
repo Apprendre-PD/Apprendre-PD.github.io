@@ -178,7 +178,6 @@
         } else {
             hearts--;
             updateHearts();
-            document.getElementById("message").innerText = `Incorrect! La réponse était ${currentQuestion.couleur} et ${currentQuestion.forme}.`;
             if (hearts === 0) {
                 endGame();
                 return;
