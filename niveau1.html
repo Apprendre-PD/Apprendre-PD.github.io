@@ -149,7 +149,7 @@
 </div>
 
 <script>
-     const questions = [
+    const questions = [
         { image: "image/a1.jpg", couleur: "Rouge", forme: "cercle" },
         { image: "image/a2.jpg", couleur: "Bleu", forme: "carre" },
         { image: "image/a3.jpg", couleur: "Mauve", forme: "trapeze" },
@@ -160,9 +160,19 @@
     let currentQuestionIndex = 0;
     let hearts = 3;
 
+    // Fisher-Yates Shuffle Algorithm
+    function shuffleQuestions() {
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]]; // Swap elements
+        }
+    }
+
     function loadQuestion() {
         const currentQuestion = questions[currentQuestionIndex];
-        document.getElementById("image-container").innerHTML = `<img src="${currentQuestion.image}" alt="Image" width="300" height="150"/>`;
+        document.getElementById("image-container").innerHTML = `
+            <img src="${currentQuestion.image}" alt="Image" width="300" height="150"/>
+        `;
         document.getElementById("currentQuestion").innerText = currentQuestionIndex + 1;
         document.getElementById("message").innerText = "";
     }
@@ -173,7 +183,7 @@
         const currentQuestion = questions[currentQuestionIndex];
 
         if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
-            document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourné au page d'accueil.";
+            document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourner à la page d'accueil.";
             document.getElementById("message").style.color = "green";
         } else {
             hearts--;
@@ -202,8 +212,7 @@
         const gameOver = document.getElementById("gameOver");
         const message = document.getElementById("message");
         if (won) {
-            message.innerText = "Félicitations! Vous avez terminé le quiz! "<br>
-                "Clique sur maison pour retourné au page d'accueil";
+            message.innerHTML = "Félicitations! Vous avez terminé le quiz!<br>Clique sur maison pour retourner à la page d'accueil.";
             message.style.color = "green";
         } else {
             gameOver.style.display = "block";
@@ -213,6 +222,7 @@
     function restartGame() {
         currentQuestionIndex = 0;
         hearts = 3;
+        shuffleQuestions(); // Re-shuffle the questions when restarting
         updateHearts();
         document.getElementById("gameOver").style.display = "none";
         loadQuestion();
@@ -222,7 +232,10 @@
         window.location.href = "index.html";
     }
 
-    window.onload = loadQuestion;
+    window.onload = function() {
+        shuffleQuestions(); // Shuffle the questions when the page loads
+        loadQuestion();
+    };
 </script>
 </body>
 </html>
