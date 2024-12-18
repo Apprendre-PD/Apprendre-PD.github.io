@@ -121,19 +121,19 @@
     <div class="options">
         <label>Quelle couleur est l'objet:</label>
         <select id="colorSelect">
-            <option value="Bleu">Bleu</option>
-            <option value="Rouge">Rouge</option>
             <option value="Mauve">Mauve</option>
-            <option value="Vert">Vert</option>
+            <option value="Rouge">Rouge</option>
             <option value="Orange">Orange</option>
+            <option value="Vert">Vert</option>
+            <option value="Bleu">Bleu</option>
         </select>
 <br>
         <label>Quelle figure:</label>
         <select id="shapeSelect">
-            <option value="cercle">Cercle</option>
-            <option value="carre">Carré</option>
-            <option value="trapeze">Trapèze</option>
             <option value="Lozenge">Losange</option>
+            <option value="carre">Carré</option>
+            <option value="cercle">Cercle</option>
+            <option value="trapeze">Trapeze</option>
             <option value="triangle">Triangle</option>
         </select>
     </div>
@@ -173,7 +173,7 @@
         const currentQuestion = questions[currentQuestionIndex];
 
         if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
-            document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourné au page d'accueil";
+            document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourné au page d'accueil.";
             document.getElementById("message").style.color = "green";
         } else {
             hearts--;
