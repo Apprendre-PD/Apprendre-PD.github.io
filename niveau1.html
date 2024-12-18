@@ -11,7 +11,7 @@
                    background-repeat: no-repeat;
                      background-size: cover;
                              background-attachment: fixed; 
-            font-family: Arial, sans-serif;
+            
             margin: 0;
             padding: 0;
             display: flex;
@@ -110,7 +110,7 @@
         <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
     </div>
     <div class="hearts" id="hearts">❤️❤️❤️</div>
-    <h1>Quiz d'image pour les 1 années</h1>
+    <h1>Quiz d'image</h1>
 
     <div class="image-container" id="image-container">
         Image
@@ -159,14 +159,6 @@
 
     let currentQuestionIndex = 0;
     let hearts = 3;
-
-    // Function to shuffle the questions array
-    function shuffleQuestions() {
-        for (let i = questions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [questions[i], questions[j]] = [questions[j], questions[i]];
-        }
-    }
 
     function loadQuestion() {
         const currentQuestion = questions[currentQuestionIndex];
