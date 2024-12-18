@@ -6,136 +6,139 @@
     <title>Apprendre-PD</title>
     <style>
         body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-attachment: fixed;
-            flex-direction: column;
-        }
+    background-image: url("image/pixelcut-export.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+    flex-direction: column;
+}
 
-        .paper {
-            background-color: white;
-            width: 500px;
-            height: auto;
-            min-height: 600px;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 50px;
-            position: relative;
-        }
+.paper {
+    background-color: white;
+    width: 500px;
+    height: auto;
+    min-height: 600px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    position: relative;
+}
 
-        .footer {
-            width: 500px;
-            margin: auto;
-            background-color: white;
-            padding: 10px;
-            text-align: center;
-        }
+.footer {
+    width: 500px;
+    margin: auto;
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+}
 
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
 
-        select {
-            padding: 5px;
-            margin: 5px;
-            font-size: 16px;
-        }
+select {
+    padding: 5px;
+    margin: 5px;
+    font-size: 16px;
+}
 
-        #result img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 450px;
-            height: 225px;
-            border-style: solid;
-            border-width: 4px;
-            border-color: black;
-        }
+#result img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    height: 225px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: black;
+}
 
-        .réponse {
-            margin-top: 20px;
-        }
+.réponse {
+    margin-top: 20px;
+}
 
-        .message {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 20px;
-        }
+.message {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+}
 
-        .progress {
-            font-size: 18px;
-            margin-top: 10px;
-        }
+.progress {
+    font-size: 18px;
+    margin-top: 10px;
+}
 
-        .question-status {
-            font-size: 20px;
-            margin-top: 10px;
-        }
+.question-status {
+    font-size: 20px;
+    margin-top: 10px;
+}
 
-        #endMessage {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
+#endMessage {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
 
-        #endButtons button {
-            margin-top: 10px;
-        }
+#endButtons button {
+    margin-top: 10px;
+}
 
-        .end-container {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 500px;
-        }
+.end-container {
+    display: none;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 500px;
+}
 
-        .footer .message {
-            font-size: 18px;
-            color: #555;
-        }
+.footer .message {
+    font-size: 18px;
+    color: #555;
+}
 
-        /* Heart Container Style */
-        .hearts-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* Heart Container Style */
+.hearts-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    z-index: 10;
+}
 
-        .heart {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-            background-image: url('https://img.icons8.com/ios-filled/50/000000/heart.png');
-            background-size: cover;
-        }
+.heart {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-image: url('https://img.icons8.com/ios-filled/50/000000/heart.png');
+    background-size: cover;
+}
 
-        .heart.empty {
-            background-image: url('https://img.icons8.com/ios-filled/50/000000/heart-broken.png');
-        }
-
+.heart.empty {
+    background-image: url('https://img.icons8.com/ios-filled/50/000000/heart-broken.png');
+}
     </style>
 </head>
 <body>
