@@ -149,7 +149,7 @@
 </div>
 
 <script>
-    const questions = [
+     const questions = [
         { image: "image/a1.jpg", couleur: "Rouge", forme: "cercle" },
         { image: "image/a2.jpg", couleur: "Bleu", forme: "carre" },
         { image: "image/a3.jpg", couleur: "Mauve", forme: "trapeze" },
@@ -159,6 +159,14 @@
 
     let currentQuestionIndex = 0;
     let hearts = 3;
+
+    // Function to shuffle the questions array
+    function shuffleQuestions() {
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+    }
 
     function loadQuestion() {
         const currentQuestion = questions[currentQuestionIndex];
