@@ -260,13 +260,7 @@ function submitAnswer() {
         finalizeQuiz();
     }
 }
-function updateProgress() {
-    if (questionsAnswered < maxQuestions) {
-        document.getElementById('progress').innerHTML = `Question ${questionsAnswered + 1} sur ${maxQuestions}`;
-    } else {
-        document.getElementById('progress').innerHTML = `Quiz terminé !`;
-    }
-}
+
     // Finalize the quiz and show the score
     function finalizeQuiz() {
         if (lives === 0) {
