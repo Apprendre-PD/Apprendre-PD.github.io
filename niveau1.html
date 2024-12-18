@@ -128,16 +128,16 @@ if (index > -1) {
 }}
         function checkAnswer() {
 var maxQuestions==5
-            var answer=document.getElementById("couleur")
+            var answer=document.getElementById("couleur")&document.getElelementById("formes")
             
             if (number ==0) {
-                correctAnswer = "vert"
+                correctAnswer = "vert"&"cercle"
             } else if (number == 1) {
-                correctAnswer = "Rouge"
+                correctAnswer = "Rouge"&"carré"
             } else if (number ==2) {
-                correctAnswer ="Bleu"
+                correctAnswer ="Bleu"&"rectangle"
             } else if (number ==3) {
-                correctAnswer = "Mauve"
+                correctAnswer = "Mauve"&"triangle"
             }
             if (answer === correctAnswer) {
                 correctAnswers++;
