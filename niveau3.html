@@ -72,7 +72,12 @@
 <div class="paper">
     <h2>Quiz Mathématique pour 3ème année</h2>
 
-    <p>Clique sur la difficulté que tu veux et après clique sur le bouton vert pour générer une question de maths</p>
+    <p>Clique sur la difficulté que tu veux et après clique sur le bouton vert pour commencer le quiz de maths<br>
+        Facile = Addition et Soustraction <br>
+        Moyenne = Multiplication <br>
+        Difficile = Divison et multiplication
+    
+    </p>
 
     <label for="difficulty">Sélectionnez la difficulté:</label>
     <select id="difficulty" name="difficulty">
@@ -100,6 +105,7 @@
     var correctAnswers = 0;
     var maxQuestions = 10; // Changed from 5 to 10
     var difficultyLevel = '';
+
 
     function startQuiz() {
         difficultyLevel = document.getElementById('difficulty').value;
