@@ -202,7 +202,8 @@
         const gameOver = document.getElementById("gameOver");
         const message = document.getElementById("message");
         if (won) {
-            message.innerText = "Félicitations! Vous avez terminé le quiz!";
+            message.innerText = "Félicitations! Vous avez terminé le quiz! "<br>
+                "Clique sur maison pour retourné au page d'accueil";
             message.style.color = "green";
         } else {
             gameOver.style.display = "block";
