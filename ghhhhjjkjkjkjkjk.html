@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprendre-PD</title>
+    <style>
+        body {
+            background-image: url("image/pixelcut-export.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+        }
+
+        .paper {
+            background-color: white;
+            width: 500px;
+            height: 525px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 105px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 125px;
+            width: 500px;
+            margin: auto;
+            background-color: white;
+            height: 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        select {
+            padding: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        #result img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 450px;
+            height: 225px;
+            border-style: solid;
+            border-width: 4px;
+            border-color: black;
+        }
+
+        .réponse {
+            bottom: 30px;
+            position: absolute;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="paper">
+    <h2>Niveau 1</h2>
+    <p><button onclick="getRandomImage()">Cliquez ici pour une image</button></p>
+
+    <span id="result"></span>
+</div>
+
+<div class="footer">
+    <label for="couleurs">Quelle couleur est l'objet:</label>
+    <select id="couleur" name="couleur">
+        <option value="Rouge">Rouge</option>
+        <option value="vert">Vert</option>
+        <option value="Bleu">Bleu</option>
+        <option value="Mauve">Mauve</option>
+    </select>
+
+    <label for="formes">Quelle fig:</label>
+    <select id="formes" name="formes">
+        <option value="carré">Carré</option>
+        <option value="cercle">Cercle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="triangle">Triangle</option>
+    </select>
+</div>
+
+<div class="réponse">
+    <p><button onclick="checkAnswer()">Soumettre</button></p>
+</div>
+
+<div id="endMessage" class="message"></div>
+<div id="endButtons" class="message" style="display:none;">
+    <button onclick="restartQuiz()">Recommencer le quiz</button>
+    <button onclick="goHome()">Retour à l'accueil</button>
+</div>
+
+<script>
+    var currentQuestionIndex = 0;
+    var maxQuestions = 5;
+    var correctAnswers = 0;
+    var answers = [
+        { couleur: "vert", forme: "cercle" },
+        { couleur: "Rouge", forme: "carré" },
+        { couleur: "Bleu", forme: "rectangle" },
+        { couleur: "Mauve", forme: "triangle" },
+        { couleur: "Bleu", forme: "cercle" } // Add more questions as needed
+    ];
+
+    function getRandomImage() {
+        // Display a random image from the array
+        var randomImage = [
+            "image/a1.jpg", "image/a2.jpg", "image/a3.jpg", "image/a4.jpg", "image/a5.jpg"
+        ];
+        var number = Math.floor(Math.random() * randomImage.length);
+        document.getElementById('result').innerHTML = '<img src="' + randomImage[number] + '" alt="Random Image"/>';
+
+        // Store the current question based on the random number
+        currentQuestionIndex = number;
+    }
+
+    function checkAnswer() {
+        var couleurAnswer = document.getElementById("couleur").value;
+        var formeAnswer = document.getElementById("formes").value;
+
+        // Compare with the correct answer
+        var correctAnswer = answers[currentQuestionIndex];
+
+        if (couleurAnswer === correctAnswer.couleur && formeAnswer === correctAnswer.forme) {
+            correctAnswers++;
+            document.getElementById('result').innerHTML = "Correct!";
+            document.getElementById('result').classList.add("correct");
+            document.getElementById('result').classList.remove("incorrect");
+        } else {
+            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer.couleur} et ${correctAnswer.forme}.`;
+            document.getElementById('result').classList.add("incorrect");
+            document.getElementById('result').classList.remove("correct");
+        }
+
+        currentQuestionIndex++;
+        if (currentQuestionIndex < maxQuestions) {
+            getRandomImage(); // Load next image
+        } else {
+            endQuiz();
+        }
+    }
+
+    function endQuiz() {
+        // End the quiz after 5 questions
+        document.getElementById('endMessage').innerHTML = correctAnswers === maxQuestions
+            ? "Bravo! Vous avez répondu correctement à toutes les questions!"
+            : `Vous avez répondu correctement à ${correctAnswers} sur ${maxQuestions} questions.`;
+
+        document.getElementById('endButtons').style.display = 'block';
+    }
+
+    function restartQuiz() {
+        correctAnswers = 0;
+        currentQuestionIndex = 0;
+        document.getElementById('endMessage').innerHTML = "";
+        document.getElementById('endButtons').style.display = 'none';
+        getRandomImage(); // Start the first question
+    }
+
+    function goHome() {
+        window.location.href = "index.html"; // Redirect to home page (change URL as needed)
+    }
+</script>
+
+</body>
+</html>
