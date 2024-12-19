@@ -1,12 +1,117 @@
-body {
+ body {
             background-image: url("image/pixelcut-export.jpeg");
             background-repeat: no-repeat;
-           background-size: cover;
+            background-size: cover;
+            background-attachment: fixed; 
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100px;
-            display: flex;                
-            justify-content: center;      
-            align-items: center;      
-            background-attachment: fixed; 
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 500px;
+            height: 550px;
+            text-align: center;
+            position: relative;
+            margin-top: 700px;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 2.5rem;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            color: red;
+        }
+
+        .image-container {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid black;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 1rem;
+            margin-right: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: red;
+        }
+
+        .game-over {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .next-quiz-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .next-quiz-arrow {
+            margin-left: 10px;
+        }
+
+        .next-quiz-arrow img {
+            width: 50px; /* Set the width of the arrow */
+            height: 50px; /* Set the height of the arrow */
+        }
+
+        .next-quiz-text {
+            font-size: 1rem;
+            color: black;
         }
