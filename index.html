@@ -1,82 +1,90 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Apprendre-PD</title>
-    <style>
-        /* Ici, on règle l'apparence du fond de la page. On met une image en fond qui couvre toute la page et on évite qu'elle se répète */
-        body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            height: 100px;
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            background-attachment: fixed; 
-        }
+    <head>
+        <title>Apprendre-PD</title>
+        <style>
+            /* Ici, on règle l'apparence du fond de la page. On met une image en fond qui couvre toute la page et on évite qu'elle se répète */
+            body {
+                background-image: url("image/pixelcut-export.jpeg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin: 0;
+                padding: 0;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-attachment: fixed;
+            }
 
-        /* C'est la boîte blanche où tout le contenu du jeu va être affiché. On la centre et on lui donne une taille fixe */
-        .paper {
-            background-color: white;
-            width: 500px; 
-            height: 550px; 
-            text-align: center; 
-            padding: 20px; 
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
-            margin-top: 700px; 
-        }
+            /* C'est la boîte blanche où tout le contenu du jeu va être affiché. On la centre et on lui donne une taille fixe */
+            .paper {
+                background-color: white;
+                width: 500px;
+                height: 550px;
+                text-align: center;
+                padding: 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                margin-top: 700px;
+            }
 
-        /* Le titre h1 est assez gros pour attirer l'attention */
-        h1 {
-            font-size: 36px;
-            margin-bottom: 10px; 
-        }
+            /* Le titre h1 est assez gros pour attirer l'attention */
+            h1 {
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
 
-        /* Le texte sous le titre */
-        p {
-            font-size: 16px;
-            margin-bottom: 30px; 
-        }
+            /* Le texte sous le titre */
+            p {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
 
-        /* C'est un conteneur pour les boutons de niveau. On utilise une grille pour organiser les images */
-        .numero {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 10px; 
-            justify-items: center; 
-            margin-top: auto; 
-        }
+            /* C'est un conteneur pour les boutons de niveau. On utilise une grille pour organiser les images */
+            .numero {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                justify-items: center;
+                margin-top: auto;
+            }
 
-        /* Ici on règle l'apparence des images des niveaux. On les rend plus petites et carrées */
-        .numero img {
-            width: 80px; 
-            height: auto; 
-        }
-    </style>
-</head>
-<body>
-    <!-- C'est la boîte principale du jeu, tout le contenu sera à l'intérieur -->
-    <div class="paper" align="center" >
-        <h1>Apprendre-PD</h1> <!-- Le titre de la page, il s'affiche en gros -->
-        <p>Bienvenue aux jeux Apprendre-PD, ici tu peux jouer des jeux éducatifs pour chaque niveau d'élémentaire</p><br>
-        
-        <!-- Un petit texte pour dire à l'utilisateur de choisir un niveau -->
-        <p id="bold"><strong>Clique sur ton niveau scolaire pour jouer un jeu : </strong></p>
-        
-        <!-- Ce sont les images des niveaux. Quand on clique sur une image, ça nous emmène sur la page d'accueil -->
-        <div class="numero">
-            <a href="niveau1.html"><img src="image/1.jpg" alt="1e année"></a> <!-- Niveau 1 -->
-            <a href="niveau2.html"><img src="image/2.jpg" alt="2e année"></a> <!-- Niveau 2 -->
-            <a href="niveau3.html"><img src="image/3.jpg" alt="3e année"></a> <!-- Niveau 3 -->
-            <a href="niveau4.html"><img src="image/4.jpg" alt="4e année"></a> <!-- Niveau 4 -->
-            <a href="niveau5.html"><img src="image/5.jpg" alt="5e année"></a> <!-- Niveau 5 -->
-            <a href="niveau6.html"><img src="image/6.jpg" alt="6e année"></a> <!-- Niveau 6 -->
+            /* Ici on règle l'apparence des images des niveaux. On les rend plus petites et carrées */
+            .numero img {
+                width: 80px;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- C'est la boîte principale du jeu, tout le contenu sera à l'intérieur -->
+        <div class="paper" align="center">
+            <h1>Apprendre-PD</h1>
+            <!-- Le titre de la page, il s'affiche en gros -->
+            <p>Bienvenue aux jeux Apprendre-PD, ici tu peux jouer des jeux éducatifs pour chaque niveau d'élémentaire</p>
+            <br />
+
+            <!-- Un petit texte pour dire à l'utilisateur de choisir un niveau -->
+            <p id="bold"><strong>Clique sur ton niveau scolaire pour jouer un jeu : </strong></p>
+
+            <!-- Ce sont les images des niveaux. Quand on clique sur une image, ça nous emmène sur la page d'accueil -->
+            <div class="numero">
+                <a href="niveau1.html"><img src="image/1.jpg" alt="1e année" /></a>
+                <!-- Niveau 1 -->
+                <a href="niveau2.html"><img src="image/2.jpg" alt="2e année" /></a>
+                <!-- Niveau 2 -->
+                <a href="niveau3.html"><img src="image/3.jpg" alt="3e année" /></a>
+                <!-- Niveau 3 -->
+                <a href="niveau4.html"><img src="image/4.jpg" alt="4e année" /></a>
+                <!-- Niveau 4 -->
+                <a href="niveau5.html"><img src="image/5.jpg" alt="5e année" /></a>
+                <!-- Niveau 5 -->
+                <a href="niveau6.html"><img src="image/6.jpg" alt="6e année" /></a>
+                <!-- Niveau 6 -->
+            </div>
+
+            <!-- Le logo de l'application. Il est centré en bas de la boîte -->
+            <img src="image/dr5uq2e9y9jnvsvq._cropped.jpeg" alt="pd-logo" width="200" height="auto" />
         </div>
-        
-        <!-- Le logo de l'application. Il est centré en bas de la boîte -->
-        <img src="image/dr5uq2e9y9jnvsvq._cropped.jpeg" alt="pd-logo" width="200" height="auto">
-    </div>
-</body>
+    </body>
 </html>
