@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -99,6 +100,12 @@
             color: #333;
         }
 
+        .hearts {
+            font-size: 1.5rem;
+            color: red;
+            margin-bottom: 10px;
+        }
+
         .end-buttons {
             margin-top: 20px;
         }
@@ -126,6 +133,10 @@
     <!-- Quiz Container -->
     <div class="container">
         <h1>Quiz : Provinces du Canada</h1>
+
+        <!-- Hearts Display -->
+        <div class="hearts" id="hearts">❤️❤️❤️</div>
+
         <p class="question" id="question">Question ici</p>
         <div class="map-container">
             <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
@@ -160,12 +171,14 @@
 
         let currentProvinceIndex = 0;
         let score = 0;
+        let hearts = 3;
 
         function loadProvince() {
             const province = provinces[currentProvinceIndex];
             document.getElementById("question").innerText = province.question;
             document.getElementById("message").innerText = "";
             document.getElementById("answerInput").value = "";
+            updateHearts();
             updateScore();
         }
 
@@ -178,6 +191,14 @@
                 document.getElementById("message").style.color = "green";
                 score++;
             } else {
+                hearts--;
+                updateHearts();
+
+                if (hearts === 0) {
+                    endQuiz();
+                    return;
+                }
+
                 document.getElementById("message").innerText = `Incorrect! La bonne réponse était ${correctAnswer}.`;
                 document.getElementById("message").style.color = "red";
             }
@@ -188,6 +209,11 @@
             } else {
                 endQuiz();
             }
+        }
+
+        function updateHearts() {
+            const heartsDisplay = "❤️".repeat(hearts);
+            document.getElementById("hearts").innerText = heartsDisplay;
         }
 
         function updateScore() {
@@ -205,6 +231,7 @@
         function restartQuiz() {
             currentProvinceIndex = 0;
             score = 0;
+            hearts = 3;
             document.getElementById("answerInput").style.display = "block";
             document.querySelector("button").style.display = "block";
             document.getElementById("endButtons").style.display = "none";
