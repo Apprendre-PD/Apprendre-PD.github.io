@@ -1,312 +1,323 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprendre-PD</title>
-    <style>
-        /* Style de la page : Fond d'écran, texte centré, et police spéciale */
-        body {
-            background-image: url("image/pixelcut-export.jpeg"); 
-            background-repeat: no-repeat; 
-            background-size: cover; 
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            background-attachment: fixed; 
-            font-family: 'Brush Script MT', Helvetica ;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre-PD</title>
+        <style>
+            /* Le style général de la page */
+            body {
+                background-image: url("image/pixelcut-export.jpeg"); /* Image de fond */
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-attachment: fixed;
+                font-family: "Brush Script MT", cursive; /* Police d'écriture stylée */
+            }
 
-        /* Style du "papier" où se trouvent les questions et réponses */
-        .paper {
-            background-color: white; 
-            width: 500px;
-            height: 550px;
-            text-align: center; 
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 105px; 
-            position: relative; 
-        }
+            /* Le style du papier blanc où tout se passe */
+            .paper {
+                background-color: white; /* Fond blanc pour le quiz */
+                width: 500px;
+                height: 550px;
+                text-align: center;
+                padding: 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre autour du papier */
+                margin-top: 105px;
+                position: relative;
+            }
 
-        /* Style du titre */
-        h2 {
-            font-size: 24px; 
-            margin-bottom: 20px; 
-        }
+            /* Titre du quiz */
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
 
-        /* Style des boutons : taille, couleur, et effet au survol */
-        button {
-            padding: 10px 20px;
-            font-size: 16px; 
-            cursor: pointer; 
-            background-color: #4CAF50; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-        }
+            /* Style du bouton de démarrage */
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #4caf50; /* Couleur verte du bouton */
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
 
-        /* Permet de gérer les éléments qui se suivent dans un conteneur en utilisant clearfix */
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
+            /* Style du sélecteur de difficulté */
+            select {
+                padding: 5px;
+                margin: 5px;
+                font-size: 16px;
+            }
 
-        /* Style pour le sélecteur de difficulté */
-        select {
-            padding: 5px; 
-            margin: 5px; 
-            font-size: 16px; 
-        }
+            /* Zone pour afficher le résultat de chaque réponse */
+            .result {
+                margin-top: 20px;
+            }
 
-        /* Style pour les résultats de la réponse */
-        .result {
-            margin-top: 20px; 
-        }
+            .result.correct {
+                color: green; /* Texte en vert si c'est correct */
+            }
 
-        .result.correct {
-            color: green; 
-        }
+            .result.incorrect {
+                color: red; /* Texte en rouge si c'est incorrect */
+            }
 
-        .result.incorrect {
-            color: red; 
-        }
+            /* Zone pour afficher la progression */
+            .progress {
+                font-size: 18px;
+                margin-top: 15px;
+            }
 
-        /* Style pour la barre de progression qui montre combien de questions ont été répondues */
-        .progress {
-            font-size: 18px; 
-            margin-top: 15px; 
-        }
+            /* Container pour les boutons suivants avec une flèche */
+            .next-quiz-container {
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
 
-        /* Style pour la flèche permettant de passer au prochain quiz */
-        .next-quiz-container {
-            position: absolute; 
-            bottom: 10px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            display: flex;
-            align-items: center;
-            cursor: pointer; 
-        }
+            .next-quiz-arrow img {
+                width: 50px;
+                height: 50px;
+            }
 
-        /* Style pour la flèche elle-même */
-        .next-quiz-arrow {
-            margin-left: 10px;
-        }
+            /* Affichage des cœurs de vie en haut à droite */
+            .hearts {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                font-size: 24px;
+                color: red;
+            }
 
-        .next-quiz-arrow img {
-            width: 50px; 
-            height: 50px; 
-        }
+            /* Bouton retour à l'accueil en haut à gauche */
+            .home-button {
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="paper">
+            <!-- Bouton retour à l'accueil -->
+            <div class="home-button">
+                <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30" /></a>
+            </div>
+            <!-- Affichage des cœurs -->
+            <div class="hearts" id="hearts">❤️❤️❤️</div>
+            <!-- Titre du quiz -->
+            <h2>Quiz de Maths</h2>
 
-        /* Texte qui accompagne la flèche */
-        .next-quiz-text {
-            font-size: 1rem; 
-            color: black; 
-        }
+            <!-- Instructions pour le quiz -->
+            <p>
+                Clique sur la difficulté que tu veux et après clique sur le bouton vert pour commencer le quiz de maths
+                <br />
+                <br />
+                <strong>
+                    Facile = Addition et Soustraction <br />
+                    Moyenne = Multiplication
+                    <br />
+                    Difficile = Division et Multiplication
+                </strong>
+            </p>
 
-        /* Style pour les cœurs qui montrent les vies restantes */
-        .hearts {
-            position: absolute; 
-            top: 10px; 
-            right: 20px; 
-            font-size: 24px; 
-            color: red; 
-        }
+            <!-- Sélectionner la difficulté -->
+            <label for="difficulty">Sélectionnez la difficulté:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Facile</option>
+                <option value="medium">Moyenne</option>
+                <option value="hard">Difficile</option>
+            </select>
+            <!-- Bouton pour démarrer le quiz -->
+            <p><button onclick="startQuiz();">Démarrer le Quiz</button></p>
 
-        /* Style pour le bouton de retour à la page d'accueil */
-        .home-button {
-            position: absolute; 
-            top: 10px;  
-            left: 20px;
-            cursor: pointer; 
-        }
-    </style>
-</head>
-<body>
+            <!-- Zone qui va s'afficher pendant le quiz -->
+            <div id="quizSection" style="display: none;">
+                <div id="question"></div>
+                <input type="number" id="answer" placeholder="Entrez votre réponse" />
+                <button onclick="checkAnswer();">Soumettre la réponse</button>
+                <div class="result" id="result"></div>
+                <div class="progress" id="progress"></div>
+            </div>
 
-<!-- Contenu principal du quiz -->
-<div class="paper">
-    <!-- Bouton de retour à la page d'accueil -->
-    <div class="home-button">
-        <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
-    </div>
-    
-    <!-- Cœurs indiquant les vies restantes -->
-    <div class="hearts" id="hearts">❤️❤️❤️</div>
+            <!-- Message de fin du quiz -->
+            <div id="endMessage" style="display: none;"></div>
+            <div id="endButtons" style="display: none;"></div>
 
-    <!-- Titre du quiz -->
-    <h2>Quiz de Maths</h2>
-
-    <!-- Explication du quiz et des niveaux de difficulté -->
-    <p>Clique sur la difficulté que tu veux et après clique sur le bouton vert pour commencer le quiz de maths 
-        <br><br>
-        <strong>
-        Facile = Addition et Soustraction <br>
-        Moyenne = Multiplication
-        <br>
-        Difficile = Division et Multiplication
-        </strong>
-    </p>
-
-    <!-- Sélecteur pour choisir la difficulté du quiz -->
-    <label for="difficulty">Sélectionnez la difficulté:</label>
-    <select id="difficulty" name="difficulty">
-        <option value="easy">Facile</option>
-        <option value="medium">Moyenne</option>
-        <option value="hard">Difficile</option>
-    </select>
-
-    <!-- Bouton pour démarrer le quiz -->
-    <p><button onclick="startQuiz();">Démarrer le Quiz</button></p>
-
-    <!-- Section qui apparaît pendant le quiz -->
-    <div id="quizSection" style="display: none;">
-        <div id="question"></div> 
-        <input type="number" id="answer" placeholder="Entrez votre réponse" /> 
-        <button onclick="checkAnswer();">Soumettre la réponse</button> 
-        <div class="result" id="result"></div> 
-        <div class="progress" id="progress"></div> 
-    </div>
-
-    <!-- Message de fin du quiz -->
-    <div id="endMessage" style="display: none;"></div>
-    
-    <!-- Boutons pour recommencer ou retourner à l'accueil -->
-    <div id="endButtons" style="display: none;"></div>
-
-    <!-- Flèche pour passer au prochain quiz -->
-    <div class="next-quiz-container" onclick="nextQuiz()">
-        <div class="next-quiz-text">
-            <p>Pensez-vous être plus intelligent qu'un élève de 6e ? Si oui, cliquez sur la flèche.</p>
+            <!-- Flèche pour passer au quiz suivant -->
+            <div class="next-quiz-container" onclick="nextQuiz()">
+                <div class="next-quiz-text">
+                    <p>Pensez-vous être plus intelligent qu'un élève de 6e ? Si oui, cliquez sur la flèche.</p>
+                </div>
+                <div class="next-quiz-arrow">
+                    <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow" />
+                </div>
+            </div>
         </div>
-        <div class="next-quiz-arrow">
-            <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow">
-        </div>
-    </div>
-</div>
 
-<script>
-    // Variables pour suivre l'état du quiz
-    var currentQuestion = {};
-    var questionsAnswered = 0;
-    var correctAnswers = 0;
-    var maxQuestions = 10;
-    var quizStarted = false;
-    var difficultyLevel = '';
-    var hearts = 3;
+        <script>
+            // Variables principales du quiz
+            var currentQuestion = {};
+            var questionsAnswered = 0;
+            var correctAnswers = 0;
+            var maxQuestions = 10; // Nombre de questions
+            var quizStarted = false;
+            var difficultyLevel = ""; // Niveau de difficulté
+            var hearts = 3; // Nombre de vies (cœurs)
 
-    // Démarre le quiz en cachant la sélection de difficulté et en montrant le quiz
-    function startQuiz() {
-        difficultyLevel = document.getElementById('difficulty').value;
-        document.getElementById('quizSection').style.display = 'block';
-        document.getElementById('endMessage').style.display = 'none';
-        document.getElementById('endButtons').style.display = 'none';
+            // Fonction pour démarrer le quiz
+            function startQuiz() {
+                difficultyLevel = document.getElementById("difficulty").value;
+                document.getElementById("quizSection").style.display = "block";
+                document.getElementById("endMessage").style.display = "none";
+                document.getElementById("endButtons").style.display = "none";
 
-        document.getElementById('difficulty').disabled = true;
-        document.querySelector('button[onclick="startQuiz();"]').disabled = true;
+                // Désactiver les éléments de sélection une fois que le quiz a commencé
+                document.getElementById("difficulty").disabled = true;
+                document.querySelector('button[onclick="startQuiz();"]').disabled = true;
 
-        questionsAnswered = 0;
-        correctAnswers = 0;
+                questionsAnswered = 0;
+                correctAnswers = 0;
 
-        generateMathQuestion(); 
-        updateProgress(); 
-        updateHearts();
-    }
+                generateMathQuestion();
+                updateProgress();
+                updateHearts();
+            }
 
-    // Fonction pour générer une question de mathématiques selon la difficulté
-    function generateMathQuestion() {
-        if (questionsAnswered >= maxQuestions || hearts === 0) {
-            endQuiz();
-            return;
-        }
+            // Fonction pour générer une nouvelle question selon la difficulté
+            function generateMathQuestion() {
+                if (questionsAnswered >= maxQuestions || hearts === 0) {
+                    endQuiz(); // Fin du quiz si le nombre de questions est atteint ou si on n'a plus de vies
+                    return;
+                }
 
-        var num1, num2, operator;
+                var num1, num2, operator;
 
-        if (difficultyLevel === "easy") {
-            num1 = Math.floor(Math.random() * 10) + 1;
-            num2 = Math.floor(Math.random() * 10) + 1;
-            operator = Math.random() < 0.5 ? "+" : "-";
-        } else if (difficultyLevel === "medium") {
-            num1 = Math.floor(Math.random() * 20) + 1;
-            num2 = Math.floor(Math.random() * 20) + 1;
-            operator = "*";
-        } else {
-            num1 = Math.floor(Math.random() * 50) + 1;
-            num2 = Math.floor(Math.random() * 50) + 1;
-            operator = Math.random() < 0.5 ? "*" : "/";
-        }
+                // Selon le niveau de difficulté, on génère des nombres et des opérateurs
+                if (difficultyLevel === "easy") {
+                    num1 = Math.floor(Math.random() * 10) + 1;
+                    num2 = Math.floor(Math.random() * 10) + 1;
+                    operator = Math.random() < 0.5 ? "+" : "-"; // Addition ou soustraction
+                } else if (difficultyLevel === "medium") {
+                    num1 = Math.floor(Math.random() * 20) + 1;
+                    num2 = Math.floor(Math.random() * 20) + 1;
+                    operator = "*"; // Multiplication
+                } else {
+                    num1 = Math.floor(Math.random() * 50) + 1;
+                    num2 = Math.floor(Math.random() * 50) + 1;
+                    operator = Math.random() < 0.5 ? "*" : "/"; // Multiplication ou division
+                }
 
-        currentQuestion = { num1, num2, operator };
-        document.getElementById('question').innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`; 
-        document.getElementById('answer').value = '';
-        document.getElementById('result').innerHTML = '';
-    }
+                currentQuestion = { num1, num2, operator };
+                document.getElementById("question").innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`;
+                document.getElementById("answer").value = "";
+                document.getElementById("result").innerHTML = "";
+            }
 
-    // Vérifie si la réponse est correcte
-    function checkAnswer() {
-        var answer = parseInt(document.getElementById('answer').value);
-        var correctAnswer;
+            // Vérifier la réponse donnée par l'utilisateur
+            function checkAnswer() {
+                var answer = parseInt(document.getElementById("answer").value);
+                var correctAnswer;
 
-        if (currentQuestion.operator === "+") {
-            correctAnswer = currentQuestion.num1 + currentQuestion.num2;
-        } else if (currentQuestion.operator === "-") {
-            correctAnswer = currentQuestion.num1 - currentQuestion.num2;
-        } else if (currentQuestion.operator === "*") {
-            correctAnswer = currentQuestion.num1 * currentQuestion.num2;
-        } else if (currentQuestion.operator === "/") {
-            correctAnswer = currentQuestion.num1 / currentQuestion.num2;
-        }
+                // Calcul de la réponse correcte
+                if (currentQuestion.operator === "+") {
+                    correctAnswer = currentQuestion.num1 + currentQuestion.num2;
+                } else if (currentQuestion.operator === "-") {
+                    correctAnswer = currentQuestion.num1 - currentQuestion.num2;
+                } else if (currentQuestion.operator === "*") {
+                    correctAnswer = currentQuestion.num1 * currentQuestion.num2;
+                } else if (currentQuestion.operator === "/") {
+                    correctAnswer = currentQuestion.num1 / currentQuestion.num2;
+                }
 
-        if (answer === correctAnswer) {
-            correctAnswers++;
-            document.getElementById('result').innerHTML = "Correct!";
-            document.getElementById('result').classList.add("correct");
-            document.getElementById('result').classList.remove("incorrect");
-        } else {
-            hearts--;
-            document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
-            document.getElementById('result').classList.add("incorrect");
-            document.getElementById('result').classList.remove("correct");
-            updateHearts(); // Met à jour les cœurs
-        }
+                // Vérifier si la réponse est correcte
+                if (answer === correctAnswer) {
+                    correctAnswers++;
+                    document.getElementById("result").innerHTML = "Correct!";
+                    document.getElementById("result").classList.add("correct");
+                    document.getElementById("result").classList.remove("incorrect");
+                } else {
+                    hearts--; // Perdre un cœur si la réponse est incorrecte
+                    document.getElementById("result").innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+                    document.getElementById("result").classList.add("incorrect");
+                    document.getElementById("result").classList.remove("correct");
+                    updateHearts();
+                }
 
-        questionsAnswered++; 
-        updateProgress(); 
+                questionsAnswered++;
+                updateProgress();
 
-        if (questionsAnswered < maxQuestions && hearts > 0) {
-            generateMathQuestion(); // Crée une nouvelle question
-        } else {
-            endQuiz(); // Termine le quiz quand on a répondu à toutes les questions ou perdu toutes les vies
-        }
-    }
+                // Si toutes les questions sont répondues ou si on n'a plus de vies, finir le quiz
+                if (questionsAnswered < maxQuestions && hearts > 0) {
+                    generateMathQuestion();
+                } else {
+                    endQuiz();
+                }
+            }
 
-    // Met à jour la barre de progression
-    function updateProgress() {
-        document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
-    }
+            // Mettre à jour la progression du quiz (combien de questions répondues)
+            function updateProgress() {
+                document.getElementById("progress").innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
+            }
 
-    // Met à jour l'affichage des cœurs
-    function updateHearts() {
-        const heartsDisplay = "❤️".repeat(hearts);
-        document.getElementById("hearts").innerText = heartsDisplay;
-    }
+            // Mettre à jour les cœurs (nombre de vies)
+            function updateHearts() {
+                const heartsDisplay = "❤️".repeat(hearts);
+                document.getElementById("hearts").innerText = heartsDisplay; // Afficher les cœurs
+            }
 
-    // Termine le quiz et affiche les résultats
-    function endQuiz() {
-        document.getElementById('quizSection').style.display = 'none';
-        document.getElementById('endMessage').style.display = 'block';
+            // Fin du quiz et afficher le message de fin
+            function endQuiz() {
+                document.getElementById("quizSection").style.display = "none";
+                document.getElementById("endMessage").style.display = "block";
 
-        if (correctAnswers === maxQuestions) {
-            document.getElementById('endMessage').innerHTML = `Félicitations! Vous avez répondu à toutes les questions correctement!`;
-        } else {
-            document.getElementById('endMessage').innerHTML = `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
-        }
+                if (correctAnswers === maxQuestions) {
+                    document.getElementById("endMessage").innerHTML = "Félicitations! Vous avez répondu à toutes les questions correctement!";
+                } else {
+                    document.getElementById("endMessage").innerHTML = `Le quiz est terminé! Vous avez répondu correctement à ${correctAnswers} questions sur ${maxQuestions}.`;
+                }
 
-        document.getElementById('endButtons').style.display = 'block';
-        document.getElementById('endButtons').innerHTML = `
-            <button onclick="restart
+                document.getElementById("endButtons").style.display = "block";
+                document.getElementById("endButtons").innerHTML = `<button onclick="restartQuiz();">Recommencer le quiz</button>
+            <button onclick="goHome();">Retour à l'accueil</button>`; // Afficher les boutons pour recommencer ou retourner à l'accueil
+            }
+
+            // Recommencer le quiz
+            function restartQuiz() {
+                questionsAnswered = 0;
+                correctAnswers = 0;
+                hearts = 3;
+                difficultyLevel = document.getElementById("difficulty").value;
+
+                document.getElementById("quizSection").style.display = "block";
+                document.getElementById("endMessage").style.display = "none";
+                document.getElementById("endButtons").style.display = "none";
+                updateHearts();
+                updateProgress();
+                generateMathQuestion();
+            }
+
+            // Retourner à l'accueil
+            function goHome() {
+                window.location.href = "index.html";
+            }
+
+            // Passer au quiz suivant
+            function nextQuiz() {
+                window.location.href = "niveau6.html";
+            }
+        </script>
+    </body>
+</html>
