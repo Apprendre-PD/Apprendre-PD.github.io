@@ -284,13 +284,24 @@
     }
 
     // Restart the quiz
-    function restartQuiz() {
-        document.getElementById('quizSection').style.display = 'none';
-        document.getElementById('difficulty').disabled = false;
-        document.querySelector('button[onclick="startQuiz();"]').disabled = false;
-        document.getElementById('endMessage').style.display = 'none';
-        document.getElementById('endButtons').style.display = 'none';
-    }
+// Restart the quiz
+function restartQuiz() {
+    // Reset the quiz state variables
+    questionsAnswered = 0;
+    correctAnswers = 0;
+    hearts = 3;
+    difficultyLevel = document.getElementById('difficulty').value; // Keep the difficulty level the same
+
+    // Update the UI
+    document.getElementById('quizSection').style.display = 'block';
+    document.getElementById('endMessage').style.display = 'none';
+    document.getElementById('endButtons').style.display = 'none';
+    updateHearts(); // Update the heart display
+    updateProgress(); // Reset progress
+
+    // Regenerate the first question
+    generateMathQuestion();
+}
 
     // Go back to the homepage
     function goHome() {
