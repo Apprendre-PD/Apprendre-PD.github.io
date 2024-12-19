@@ -227,15 +227,21 @@
             document.getElementById("endButtons").style.display = "block";
         }
 
-        function restartQuiz() {
-            currentProvinceIndex = 0;
-            score = 0;
-            hearts = 3;
-            document.getElementById("answerInput").style.display = "block";
-            document.querySelector("button").style.display = "block";
-            document.getElementById("endButtons").style.display = "none";
-            loadProvince();
-        }
+     function restartQuiz() {
+    currentProvinceIndex = 0;
+    score = 0;
+    hearts = 3;
+    document.getElementById("answerInput").style.display = "block";
+    document.querySelector("button").style.display = "block";
+    document.getElementById("endButtons").style.display = "none";
+    
+    // Re-load province and ensure everything is centered
+    loadProvince();
+    
+    // Reset the input field and button layout
+    document.getElementById("answerInput").style.width = '80%';  // Ensure the width stays consistent
+    document.querySelector("button").style.margin = '10px 0';  // Adjust margins if necessary
+}
 
         function goHome() {
             window.location.href = "index.html";
