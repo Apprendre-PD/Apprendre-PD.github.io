@@ -1,118 +1,135 @@
- body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed; 
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100px;
-            background-color: #f2f2f2;
-  font-family: 'Brush Script MT', cursive;
-        }
+à/* Le style pour le corps de la page */
+body {
+    background-image: url("image/pixelcut-export.jpeg"); /* On met une image de fond */
+    background-repeat: no-repeat; /* L'image ne se répète pas */
+    background-size: cover; /* L'image couvre toute la page */
+    background-attachment: fixed; /* L'image reste fixe quand on fait défiler la page */
+    margin: 0; /* On enlève les marges autour de la page */
+    padding: 0; /* On enlève les espacements internes de la page */
+    display: flex; /* On utilise flexbox pour centrer tout le contenu */
+    justify-content: center; /* On centre tout horizontalement */
+    align-items: center; /* On centre tout verticalement */
+    height: 100px; /* On donne une hauteur de 100px à la page */
+    background-color: #f2f2f2; /* Si l'image de fond ne charge pas, la couleur de fond sera gris clair */
+    font-family: 'Brush Script MT', cursive; /* La police du texte de la page */
+}
 
-        .container {
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 500px;
-            height: 550px;
-            text-align: center;
-            position: relative;
-            margin-top: 700px;
-        }
+/* Style du bloc contenant le quiz */
+.container {
+    background-color: white; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    padding: 20px; 
+    width: 500px;
+    height: 550px; 
+    text-align: center; 
+    position: relative; 
+    margin-top: 700px; 
+}
 
-        h1 {
-            margin: 10px 0;
-            font-size: 2.5rem;
-        }
+/* Le titre principal de la page (ex. "Quiz") */
+h1 {
+    margin: 10px 0; 
+    font-size: 2.5rem; 
+}
 
-        .hearts {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 24px;
-            color: red;
-        }
+/* Affichage des cœurs (indiquant le nombre de vies) */
+.hearts {
+    position: absolute; 
+    top: 10px; /* On place les cœurs à 10px du haut */
+    right: 20px; 
+    font-size: 24px; 
+    color: red; /* La couleur des cœurs est rouge */
+}
 
-        .image-container {
-            width: 80%;
-            margin: 20px auto;
-            border: 2px solid black;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* Conteneur de l'image, pour la placer au centre */
+.image-container {
+    width: 80%; 
+    margin: 20px auto; 
+    border: 2px solid black; /* Bordure noire autour de l'image */
+    height: 150px; /* Hauteur de l'image */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* On centre l'image horizontalement */
+}
 
-        .options {
-            margin: 20px 0;
-        }
+/* Section des options (par exemple les choix du quiz) */
+.options {
+    margin: 20px 0; /* Espaces au-dessus et en dessous des options */
+}
 
-        label {
-            font-size: 1rem;
-            margin-right: 10px;
-        }
+/* Style des étiquettes des options (comme les choix dans une liste déroulante) */
+label {
+    font-size: 1rem; 
+    margin-right: 10px; 
+}
 
-        select {
-            padding: 5px;
-            font-size: 1rem;
-            margin-right: 20px;
-        }
+/* Style du menu déroulant pour choisir une option */
+select {
+    padding: 5px; 
+    font-size: 1rem; 
+    margin-right: 20px; 
+}
 
-        button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+/* Style du bouton pour soumettre la réponse */
+button {
+    padding: 10px 20px; 
+    font-size: 1rem; 
+    background-color: #4CAF50; /* Couleur de fond verte du bouton */
+    color: white; /* Couleur du texte du bouton (blanc) */
+    border: none; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
 
-        button:hover {
-            background-color: #45a049;
-        }
+/* Style du bouton quand on passe la souris dessus */
+button:hover {
+    background-color: #45a049; /* Couleur plus foncée du bouton quand on survole */
+}
 
-        .message {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            color: red;
-        }
+/* Message pour les bonnes ou mauvaises réponses */
+.message {
+    font-size: 1.2rem; 
+    margin: 10px 0; 
+    color: red; 
+}
 
-        .game-over {
-            display: none;
-            margin-top: 20px;
-        }
+/* Section qui s'affiche à la fin du jeu (par exemple, quand le joueur a perdu) */
+.game-over {
+    display: none; 
+    margin-top: 20px; 
+}
 
-        .home-button {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            cursor: pointer;
-        }
+/* Bouton maison pour revenir à la page d'accueil */
+.home-button {
+    position: absolute;
+    top: 10px; 
+    left: 20px;
+    cursor: pointer; 
+}
 
-        .next-quiz-container {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
+/* Conteneur pour le bouton suivant du quiz (avec la flèche pour passer à la prochaine question) */
+.next-quiz-container {
+    position: absolute; 
+    bottom: 20px; 
+    right: 20px; 
+    display: flex; 
+    align-items: center; 
+    cursor: pointer; 
+}
 
-        .next-quiz-arrow {
-            margin-left: 10px;
-        }
+/* Espacement à gauche de la flèche pour qu'elle ne soit pas collée au texte */
+.next-quiz-arrow {
+    margin-left: 10px;
+}
 
-        .next-quiz-arrow img {
-            width: 50px; /* Set the width of the arrow */
-            height: 50px; /* Set the height of the arrow */
-        }
+/* Taille de l'image de la flèche */
+.next-quiz-arrow img {
+    width: 50px; 
+    height: 50px; 
+}
 
-        .next-quiz-text {
-            font-size: 1rem;
-            color: black;
-        }
+/* Texte du bouton suivant du quiz */
+.next-quiz-text {
+    font-size: 1rem; /* Taille du texte du bouton */
+    color: black; /* Couleur du texte du bouton */
+}
