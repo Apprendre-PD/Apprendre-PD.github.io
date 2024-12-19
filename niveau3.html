@@ -5,127 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apprendre-PD</title>
     <style>
+        /* Style de la page : Fond d'écran, texte centré, et police spéciale */
         body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            background-image: url("image/pixelcut-export.jpeg"); 
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
             display: flex;
-            justify-content: center;
-            align-items: center;
-            background-attachment: fixed;
+            justify-content: center; 
+            align-items: center; 
+            background-attachment: fixed; 
             font-family: 'Brush Script MT', cursive;
         }
 
+        /* Style du "papier" où se trouvent les questions et réponses */
         .paper {
-            background-color: white;
+            background-color: white; 
             width: 500px;
             height: 550px;
-            text-align: center;
+            text-align: center; 
             padding: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 105px;
-            position: relative;
+            margin-top: 105px; 
+            position: relative; 
         }
 
+        /* Style du titre */
         h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 24px; 
+            margin-bottom: 20px; 
         }
 
+        /* Style des boutons : taille, couleur, et effet au survol */
         button {
             padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            font-size: 16px; 
+            cursor: pointer; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
         }
 
+        /* Permet de gérer les éléments qui se suivent dans un conteneur en utilisant clearfix */
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
         }
 
+        /* Style pour le sélecteur de difficulté */
         select {
-            padding: 5px;
-            margin: 5px;
-            font-size: 16px;
+            padding: 5px; 
+            margin: 5px; 
+            font-size: 16px; 
         }
 
+        /* Style pour les résultats de la réponse */
         .result {
-            margin-top: 20px;
+            margin-top: 20px; 
         }
 
         .result.correct {
-            color: green;
+            color: green; 
         }
 
         .result.incorrect {
-            color: red;
+            color: red; 
         }
 
+        /* Style pour la barre de progression qui montre combien de questions ont été répondues */
         .progress {
-            font-size: 18px;
-            margin-top: 15px;
+            font-size: 18px; 
+            margin-top: 15px; 
         }
 
+        /* Style pour la flèche permettant de passer au prochain quiz */
         .next-quiz-container {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: absolute; 
+            bottom: 10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
             display: flex;
             align-items: center;
-            cursor: pointer;
+            cursor: pointer; 
         }
 
+        /* Style pour la flèche elle-même */
         .next-quiz-arrow {
             margin-left: 10px;
         }
 
         .next-quiz-arrow img {
-            width: 50px;
-            height: 50px;
+            width: 50px; 
+            height: 50px; 
         }
 
+        /* Texte qui accompagne la flèche */
         .next-quiz-text {
-            font-size: 1rem;
-            color: black;
+            font-size: 1rem; 
+            color: black; 
         }
 
+        /* Style pour les cœurs qui montrent les vies restantes */
         .hearts {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 24px;
-            color: red;
+            position: absolute; 
+            top: 10px; 
+            right: 20px; 
+            font-size: 24px; 
+            color: red; 
         }
 
+        /* Style pour le bouton de retour à la page d'accueil */
         .home-button {
-            position: absolute;
-            top: 10px;
+            position: absolute; 
+            top: 10px;  
             left: 20px;
-            cursor: pointer;
+            cursor: pointer; 
         }
     </style>
 </head>
 <body>
 
+<!-- Contenu principal du quiz -->
 <div class="paper">
+    <!-- Bouton de retour à la page d'accueil -->
     <div class="home-button">
         <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
     </div>
+    
+    <!-- Cœurs indiquant les vies restantes -->
     <div class="hearts" id="hearts">❤️❤️❤️</div>
+
+    <!-- Titre du quiz -->
     <h2>Quiz de Maths</h2>
 
+    <!-- Explication du quiz et des niveaux de difficulté -->
     <p>Clique sur la difficulté que tu veux et après clique sur le bouton vert pour commencer le quiz de maths 
-        <br>
-        <br>
+        <br><br>
         <strong>
         Facile = Addition et Soustraction <br>
         Moyenne = Multiplication
@@ -134,25 +153,33 @@
         </strong>
     </p>
 
+    <!-- Sélecteur pour choisir la difficulté du quiz -->
     <label for="difficulty">Sélectionnez la difficulté:</label>
     <select id="difficulty" name="difficulty">
         <option value="easy">Facile</option>
         <option value="medium">Moyenne</option>
         <option value="hard">Difficile</option>
     </select>
+
+    <!-- Bouton pour démarrer le quiz -->
     <p><button onclick="startQuiz();">Démarrer le Quiz</button></p>
 
+    <!-- Section qui apparaît pendant le quiz -->
     <div id="quizSection" style="display: none;">
-        <div id="question"></div>
-        <input type="number" id="answer" placeholder="Entrez votre réponse" />
-        <button onclick="checkAnswer();">Soumettre la réponse</button>
-        <div class="result" id="result"></div>
-        <div class="progress" id="progress"></div>
+        <div id="question"></div> 
+        <input type="number" id="answer" placeholder="Entrez votre réponse" /> 
+        <button onclick="checkAnswer();">Soumettre la réponse</button> 
+        <div class="result" id="result"></div> 
+        <div class="progress" id="progress"></div> 
     </div>
 
+    <!-- Message de fin du quiz -->
     <div id="endMessage" style="display: none;"></div>
+    
+    <!-- Boutons pour recommencer ou retourner à l'accueil -->
     <div id="endButtons" style="display: none;"></div>
 
+    <!-- Flèche pour passer au prochain quiz -->
     <div class="next-quiz-container" onclick="nextQuiz()">
         <div class="next-quiz-text">
             <p>Pensez-vous être plus intelligent qu'un élève de 6e ? Si oui, cliquez sur la flèche.</p>
@@ -164,6 +191,7 @@
 </div>
 
 <script>
+    // Variables pour suivre l'état du quiz
     var currentQuestion = {};
     var questionsAnswered = 0;
     var correctAnswers = 0;
@@ -172,7 +200,7 @@
     var difficultyLevel = '';
     var hearts = 3;
 
-    // Start the quiz by hiding the level selection and showing the quiz section
+    // Démarre le quiz en cachant la sélection de difficulté et en montrant le quiz
     function startQuiz() {
         difficultyLevel = document.getElementById('difficulty').value;
         document.getElementById('quizSection').style.display = 'block';
@@ -185,12 +213,12 @@
         questionsAnswered = 0;
         correctAnswers = 0;
 
-        generateMathQuestion();
-        updateProgress();
+        generateMathQuestion(); 
+        updateProgress(); 
         updateHearts();
     }
 
-    // Generate a new math question based on difficulty
+    // Fonction pour générer une question de mathématiques selon la difficulté
     function generateMathQuestion() {
         if (questionsAnswered >= maxQuestions || hearts === 0) {
             endQuiz();
@@ -214,11 +242,12 @@
         }
 
         currentQuestion = { num1, num2, operator };
-        document.getElementById('question').innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`;
+        document.getElementById('question').innerHTML = `Quelle est la réponse de ${num1} ${operator} ${num2}?`; 
         document.getElementById('answer').value = '';
         document.getElementById('result').innerHTML = '';
     }
 
+    // Vérifie si la réponse est correcte
     function checkAnswer() {
         var answer = parseInt(document.getElementById('answer').value);
         var correctAnswer;
@@ -243,30 +272,31 @@
             document.getElementById('result').innerHTML = `Incorrect! La bonne réponse était ${correctAnswer}.`;
             document.getElementById('result').classList.add("incorrect");
             document.getElementById('result').classList.remove("correct");
-            updateHearts();
+            updateHearts(); // Met à jour les cœurs
         }
 
-        questionsAnswered++;
-        updateProgress();
+        questionsAnswered++; 
+        updateProgress(); 
 
         if (questionsAnswered < maxQuestions && hearts > 0) {
-            generateMathQuestion();
+            generateMathQuestion(); // Crée une nouvelle question
         } else {
-            endQuiz();
+            endQuiz(); // Termine le quiz quand on a répondu à toutes les questions ou perdu toutes les vies
         }
     }
 
-    // Update progress to show how many questions the user has answered out of maxQuestions
+    // Met à jour la barre de progression
     function updateProgress() {
         document.getElementById('progress').innerHTML = `Vous avez répondu à ${questionsAnswered} sur ${maxQuestions} questions.`;
     }
 
+    // Met à jour l'affichage des cœurs
     function updateHearts() {
         const heartsDisplay = "❤️".repeat(hearts);
         document.getElementById("hearts").innerText = heartsDisplay;
     }
 
-    // End the quiz and show the results
+    // Termine le quiz et affiche les résultats
     function endQuiz() {
         document.getElementById('quizSection').style.display = 'none';
         document.getElementById('endMessage').style.display = 'block';
@@ -279,41 +309,4 @@
 
         document.getElementById('endButtons').style.display = 'block';
         document.getElementById('endButtons').innerHTML = `
-            <button onclick="restartQuiz();">Recommencer le quiz</button>
-            <button onclick="goHome();">Retour à l'accueil</button>
-        `;
-    }
-
-    // Restart the quiz
-// Restart the quiz
-function restartQuiz() {
-    // Reset the quiz state variables
-    questionsAnswered = 0;
-    correctAnswers = 0;
-    hearts = 3;
-    difficultyLevel = document.getElementById('difficulty').value; // Keep the difficulty level the same
-
-    // Update the UI
-    document.getElementById('quizSection').style.display = 'block';
-    document.getElementById('endMessage').style.display = 'none';
-    document.getElementById('endButtons').style.display = 'none';
-    updateHearts(); // Update the heart display
-    updateProgress(); // Reset progress
-
-    // Regenerate the first question
-    generateMathQuestion();
-}
-
-    // Go back to the homepage
-    function goHome() {
-        window.location.href = "index.html";
-    }
-
-    // Redirect to the next quiz
-    function nextQuiz() {
-        window.location.href = "niveau6.html";
-    }
-</script>
-
-</body>
-</html>
+            <button onclick="restart
