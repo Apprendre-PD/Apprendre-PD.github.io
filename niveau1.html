@@ -165,7 +165,11 @@ t <!DOCTYPE html>
             }
 
             // Passe au prochain quiz
-
+            function nextQuiz() {
+                if (confirm("Est-tu plus intelligent qu'un élève de 3ème?")) {
+                    window.location.href = "niveau3.html"; 
+                }
+            }
 
             window.onload = function () {
                 shuffleQuestions(); 
