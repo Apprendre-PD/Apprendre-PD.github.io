@@ -101,16 +101,27 @@
             cursor: pointer;
         }
 
-        .next-quiz-arrow {
+        .next-quiz-container {
             position: absolute;
             bottom: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
             cursor: pointer;
+        }
+
+        .next-quiz-arrow {
+            margin-left: 10px;
         }
 
         .next-quiz-arrow img {
             width: 50px; /* Set the width of the arrow */
             height: 50px; /* Set the height of the arrow */
+        }
+
+        .next-quiz-text {
+            font-size: 1rem;
+            color: black;
         }
 
     </style>
@@ -159,9 +170,14 @@
         <button onclick="goHome()">Retour à l'accueil</button>
     </div>
 
-    <!-- Arrow to next quiz -->
-    <div class="next-quiz-arrow" onclick="nextQuiz()">
-        <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow">
+    <!-- Next quiz section -->
+    <div class="next-quiz-container" onclick="nextQuiz()">
+        <div class="next-quiz-text">
+            <p>Pensez-vous être plus intelligent qu'un élève de 6e ? Si oui, cliquez sur la flèche.</p>
+        </div>
+        <div class="next-quiz-arrow">
+            <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow">
+        </div>
     </div>
 
 </div>
