@@ -1,161 +1,180 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
- <title>Apprendre-PD</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Apprendre-PD</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Ce bouton renvoie à la page d'accueil quand on clique dessus -->
+            <div class="home-button">
+                <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30" /></a>
+            </div>
 
-<div class="container">
-    <div class="home-button">
-        <a href="index.html"><img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30"></a>
-    </div>
-    <div class="hearts" id="hearts">❤️❤️❤️</div>
-    <h1>Quiz d'image</h1>
+            <!-- Affiche les cœurs (vies du jeu), au départ c'est 3 cœurs -->
+            <div class="hearts" id="hearts">❤️❤️❤️</div>
 
-    <div class="image-container" id="image-container">
-    </div>
+            <!-- Le titre du quiz -->
+            <h1>Quiz d'image</h1>
 
-    <p>Question <span id="currentQuestion">1</span> sur 5</p>
+            <!-- C'est là où l'image de la question sera affichée -->
+            <div class="image-container" id="image-container"></div>
 
-    <div class="options">
-        <label>Quelle couleur est l'objet:</label>
-        <select id="colorSelect">
-            <option value="Mauve">Mauve</option>
-            <option value="Rouge">Rouge</option>
-            <option value="Orange">Orange</option>
-            <option value="Vert">Vert</option>
-            <option value="Bleu">Bleu</option>
-        </select>
-        <br>
-        <label>Quelle figure:</label>
-        <select id="shapeSelect">
-            <option value="Lozenge">Losange</option>
-            <option value="carre">Carré</option>
-            <option value="cercle">Cercle</option>
-            <option value="trapeze">Trapeze</option>
-            <option value="triangle">Triangle</option>
-        </select>
-    </div>
+            <!-- Affiche la question actuelle (ex: question 1 sur 5) -->
+            <p>Question <span id="currentQuestion">1</span> sur 5</p>
 
-    <button onclick="checkAnswer()">Soumettre la réponse</button>
-    <div class="message" id="message"></div>
+            <div class="options">
+                <!-- Question pour choisir la couleur -->
+                <label>Quelle couleur est l'objet:</label>
+                <select id="colorSelect">
+                    <option value="Mauve">Mauve</option>
+                    <option value="Rouge">Rouge</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Vert">Vert</option>
+                    <option value="Bleu">Bleu</option>
+                </select>
+                <br />
+                <!-- Question pour choisir la forme -->
+                <label>Quelle figure:</label>
+                <select id="shapeSelect">
+                    <option value="Lozenge">Losange</option>
+                    <option value="carre">Carré</option>
+                    <option value="cercle">Cercle</option>
+                    <option value="trapeze">Trapeze</option>
+                    <option value="triangle">Triangle</option>
+                </select>
+            </div>
 
-    <div class="game-over" id="gameOver">
-        <p>Vous avez perdu toutes vos vies!</p>
-        <button onclick="restartGame()">Recommencer le jeu</button>
-        <button onclick="goHome()">Retour à l'accueil</button>
-    </div>
+            <!-- Le bouton pour soumettre la réponse -->
+            <button onclick="checkAnswer()">Soumettre la réponse</button>
+            <!-- Message qui apparaît quand on répond -->
+            <div class="message" id="message"></div>
 
-    <!-- Next quiz section -->
-    <div class="next-quiz-container" onclick="nextQuiz()">
-        <div class="next-quiz-text">
-            <p>Pensez-vous être plus intelligent qu'un élève de 3e ? Si oui, cliquez sur la flèche.</p>
+            <!-- C'est la section de la fin du jeu, si on perd toutes les vies -->
+            <div class="game-over" id="gameOver">
+                <p>Vous avez perdu toutes vos vies!</p>
+                <button onclick="restartGame()">Recommencer le jeu</button>
+                <button onclick="goHome()">Retour à l'accueil</button>
+            </div>
+
+            <!-- Section pour passer au prochain quiz -->
+            <div class="next-quiz-container" onclick="nextQuiz()">
+                <div class="next-quiz-text">
+                    <p>Pensez-vous être plus intelligent qu'un élève de 3e ? Si oui, cliquez sur la flèche.</p>
+                </div>
+                <div class="next-quiz-arrow">
+                    <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow" />
+                </div>
+            </div>
         </div>
-        <div class="next-quiz-arrow">
-            <img src="https://www.trafficdepot.ca/wp-content/uploads/2020/08/info66r.png" alt="Next Quiz Arrow">
-        </div>
-    </div>
 
-</div>
+        <script>
+            // Liste des questions, chaque question a une image, une couleur et une forme
+            const questions = [
+                { image: "image/a1.jpg", couleur: "Rouge", forme: "cercle" },
+                { image: "image/a2.jpg", couleur: "Bleu", forme: "carre" },
+                { image: "image/a3.jpg", couleur: "Mauve", forme: "trapeze" },
+                { image: "image/a4.jpg", couleur: "Vert", forme: "Lozenge" },
+                { image: "image/a5.jpg", couleur: "Orange", forme: "triangle" },
+            ];
 
-<script>
-    const questions = [
-        { image: "image/a1.jpg", couleur: "Rouge", forme: "cercle" },
-        { image: "image/a2.jpg", couleur: "Bleu", forme: "carre" },
-        { image: "image/a3.jpg", couleur: "Mauve", forme: "trapeze" },
-        { image: "image/a4.jpg", couleur: "Vert", forme: "Lozenge" },
-        { image: "image/a5.jpg", couleur: "Orange", forme: "triangle" }
-    ];
+            let currentQuestionIndex = 0; 
+            let hearts = 3; // Le nombre de vies (cœurs)
 
-    let currentQuestionIndex = 0;
-    let hearts = 3;
+            // Cette fonction mélange les questions de manière aléatoire (pour que les questions ne soient pas toujours dans le même ordre)
+            function shuffleQuestions() {
+                for (let i = questions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1)); 
+                    [questions[i], questions[j]] = [questions[j], questions[i]]; 
+                }
+            }
 
-    // Fisher-Yates Shuffle Algorithm
-    function shuffleQuestions() {
-        for (let i = questions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [questions[i], questions[j]] = [questions[j], questions[i]]; // Swap elements
-        }
-    }
-
-    function loadQuestion() {
-        const currentQuestion = questions[currentQuestionIndex];
-        document.getElementById("image-container").innerHTML = `
+            // Charge une question dans la page (l'image et la question actuelle)
+            function loadQuestion() {
+                const currentQuestion = questions[currentQuestionIndex];
+                document.getElementById("image-container").innerHTML = `
             <img src="${currentQuestion.image}" alt="Image" width="300" height="150"/>
         `;
-        document.getElementById("currentQuestion").innerText = currentQuestionIndex + 1;
-        document.getElementById("message").innerText = "";
-    }
-
-    function checkAnswer() {
-        const color = document.getElementById("colorSelect").value;
-        const shape = document.getElementById("shapeSelect").value;
-        const currentQuestion = questions[currentQuestionIndex];
-
-        if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
-            document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourner à la page d'accueil.";
-            document.getElementById("message").style.color = "green";
-        } else {
-            hearts--;
-            updateHearts();
-            
-            if (hearts === 0) {
-                endGame();
-                return;
+                document.getElementById("currentQuestion").innerText = currentQuestionIndex + 1; 
+                document.getElementById("message").innerText = ""; 
             }
-        }
 
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            endGame(true);
-        }
-    }
+            // Vérifie la réponse de l'utilisateur
+            function checkAnswer() {
+                const color = document.getElementById("colorSelect").value; 
+                const shape = document.getElementById("shapeSelect").value; 
+                const currentQuestion = questions[currentQuestionIndex];
 
-    function updateHearts() {
-        const heartsDisplay = "❤️".repeat(hearts);
-        document.getElementById("hearts").innerText = heartsDisplay;
-    }
+                // Si la réponse est correcte
+                if (color === currentQuestion.couleur && shape === currentQuestion.forme) {
+                    document.getElementById("message").innerText = "Bonne réponse! Clique sur maison pour retourner à la page d'accueil.";
+                    document.getElementById("message").style.color = "green"; 
+                } else {
+                    
+                    hearts--; 
+                    updateHearts(); 
 
-    function endGame(won = false) {
-        const gameOver = document.getElementById("gameOver");
-        const message = document.getElementById("message");
-        if (won) {
-            message.innerHTML = "Félicitations! Vous avez terminé le quiz!<br>Clique sur maison pour retourner à la page d'accueil.";
-            message.style.color = "green";
-        } else {
-            gameOver.style.display = "block";
-        }
-    }
+                    if (hearts === 0) {
+                        endGame(); 
+                        return;
+                    }
+                }
 
-    function restartGame() {
-        currentQuestionIndex = 0;
-        hearts = 3;
-        shuffleQuestions(); // Re-shuffle the questions when restarting
-        updateHearts();
-        document.getElementById("gameOver").style.display = "none";
-        loadQuestion();
-    }
+                // Passer à la question suivante
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion(); 
+                } else {
+                    endGame(true); 
+                }
+            }
 
-    function goHome() {
-        window.location.href = "index.html";
-    }
+            // Met à jour l'affichage des cœurs (vies restantes)
+            function updateHearts() {
+                const heartsDisplay = "❤️".repeat(hearts); 
+                document.getElementById("hearts").innerText = heartsDisplay; // Affiche les cœurs
+            }
 
-    function nextQuiz() {
-        if (confirm("Are you smarter than a 3th grader?")) {
-            window.location.href = "niveau3.html"; // Redirect to next page
-        }
-    }
+            // Affiche la fin du jeu
+            function endGame(won = false) {
+                const gameOver = document.getElementById("gameOver");
+                const message = document.getElementById("message");
+                if (won) {
+                    message.innerHTML = "Félicitations! Vous avez terminé le quiz!<br>Clique sur maison pour retourner à la page d'accueil.";
+                    message.style.color = "green"; 
+                } else {
+                    gameOver.style.display = "block"; // Affiche l'écran de fin de jeu
+                }
+            }
 
-    window.onload = function() {
-        shuffleQuestions(); // Shuffle the questions when the page loads
-        loadQuestion();
-    };
-</script>
+            // Redémarre le jeu
+            function restartGame() {
+                currentQuestionIndex = 0; 
+                hearts = 3; 
+                shuffleQuestions(); 
+                updateHearts();
+                document.getElementById("gameOver").style.display = "none"; 
+                loadQuestion(); 
+            }
 
-</body>
+            // Retourne à la page d'accueil
+            function goHome() {
+                window.location.href = "index.html"; 
+            }
+
+            // Passe au prochain quiz
+            function nextQuiz() {
+                if (confirm("Are you smarter than a 3th grader?")) {
+                    window.location.href = "niveau3.html"; 
+                }
+            }
+
+            window.onload = function () {
+                shuffleQuestions(); 
+                loadQuestion(); 
+            };
+        </script>
+    </body>
 </html>
