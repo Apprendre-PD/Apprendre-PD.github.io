@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprenre-PD</title>
+    <title>Quiz Géographie - Provinces du Canada</title>
     <style>
         body {
             background-image: url('https://github.com/Apprendre-PD/Apprendre-PD.github.io/blob/main/image/pixelcut-export.jpeg?raw=true');
@@ -26,7 +26,7 @@
             padding: 20px;
             width: 500px;
             text-align: center;
-            margin-top: 100px;
+            margin-top: 200px;
             position: relative; /* Added to position the home button relative to this container */
         }
 
@@ -134,21 +134,24 @@
     <div class="container">
         <h1>Quiz : Provinces du Canada</h1>
 
-        <!-- Hearts Display -->
-        <div class="hearts" id="hearts">❤️❤️❤️</div>
+        <!-- Paper Style Container for quiz elements -->
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
+            <!-- Hearts Display -->
+            <div class="hearts" id="hearts">❤️❤️❤️</div>
 
-        <p class="question" id="question">Question ici</p>
-        <div class="map-container">
-            <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
-        </div>
-        <input type="text" id="answerInput" placeholder="Écrivez le nom de la province ici">
-        <button onclick="checkAnswer()">Soumettre</button>
-        <div class="message" id="message"></div>
-        <div class="score" id="score"></div>
-        <div class="warning" id="warningMessage">Veuillez entrer votre réponse en MAJUSCULES.</div>
-        <div class="end-buttons" id="endButtons" style="display: none;">
-            <button onclick="restartQuiz()">Recommencer le quiz</button>
-            <button onclick="goHome()">Retour à l'accueil</button>
+            <p class="question" id="question">Question ici</p>
+            <div class="map-container">
+                <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
+            </div>
+            <input type="text" id="answerInput" placeholder="Écrivez le nom de la province ici">
+            <button onclick="checkAnswer()">Soumettre</button>
+            <div class="message" id="message"></div>
+            <div class="score" id="score"></div>
+            <div class="warning" id="warningMessage">Veuillez entrer votre réponse en MAJUSCULES.</div>
+            <div class="end-buttons" id="endButtons" style="display: none;">
+                <button onclick="restartQuiz()">Recommencer le quiz</button>
+                <button onclick="goHome()">Retour à l'accueil</button>
+            </div>
         </div>
     </div>
 
