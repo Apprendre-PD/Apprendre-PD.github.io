@@ -6,12 +6,11 @@
     <title>Apprendre-PD</title>
     <style>
 
-             body {
-                  background-image: url("image/pixelcut-export.jpeg");
-                   background-repeat: no-repeat;
-                     background-size: cover;
-                             background-attachment: fixed; 
-            
+        body {
+            background-image: url("image/pixelcut-export.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed; 
             margin: 0;
             padding: 0;
             display: flex;
@@ -25,7 +24,7 @@
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             padding: 20px;
-             width: 500px;
+            width: 500px;
             height: 550px;
             text-align: center;
             position: relative;
@@ -101,6 +100,15 @@
             left: 20px;
             cursor: pointer;
         }
+
+        .next-quiz-arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -127,7 +135,7 @@
             <option value="Vert">Vert</option>
             <option value="Bleu">Bleu</option>
         </select>
-<br>
+        <br>
         <label>Quelle figure:</label>
         <select id="shapeSelect">
             <option value="Lozenge">Losange</option>
@@ -146,6 +154,12 @@
         <button onclick="restartGame()">Recommencer le jeu</button>
         <button onclick="goHome()">Retour à l'accueil</button>
     </div>
+
+    <!-- Arrow to next quiz -->
+    <div class="next-quiz-arrow" onclick="nextQuiz()">
+        ➡️
+    </div>
+
 </div>
 
 <script>
@@ -232,10 +246,17 @@
         window.location.href = "index.html";
     }
 
+    function nextQuiz() {
+        if (confirm("Are you smarter than a 6th grader?")) {
+            window.location.href = "niveau6.html"; // Redirect to next page
+        }
+    }
+
     window.onload = function() {
         shuffleQuestions(); // Shuffle the questions when the page loads
         loadQuestion();
     };
 </script>
+
 </body>
 </html>
