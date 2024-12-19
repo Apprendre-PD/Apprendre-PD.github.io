@@ -11,7 +11,7 @@ body {
     align-items: center; 
     height: 100px; 
     background-color: #f2f2f2; 
-    font-family: 'Brush Script MT', cursive; 
+    font-family: 'Brush Script MT', sans-serif;
 }
 
 /* Style du bloc contenant le quiz */
