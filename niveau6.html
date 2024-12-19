@@ -1,263 +1,282 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprendre-PD</title>
-    <style>
-        body {
-            background-image: url("image/pixelcut-export.jpeg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-attachment: fixed;
-            font-family: 'Brush Script MT', cursive;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre-PD</title>
+        <style>
+            /* C'est ici qu'on définit le style général de la page */
+            body {
+                background-image: url("image/pixelcut-export.jpeg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-attachment: fixed;
+                font-family: "Brush Script MT", cursive;
+            }
 
-        .container {
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 500px;
-            text-align: center;
-            margin-top: 100px;
-            position: relative; /* Added to position the home button relative to this container */
+            /* Bloc qui contient le quiz */
+            .container {
+                background-color: white;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                width: 500px;
+                text-align: center;
+                margin-top: 100px;
+                position: relative;
+            }
 
-        }
+            /* Le bouton maison qui permet de retourner à la page d'accueil */
+            .home-button {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                cursor: pointer;
+            }
 
-        .home-button {
-            position: absolute;
-            top: 10px;
-            left: 10px; /* Adjust to position the home button at the top left of the container */
-            cursor: pointer;
-        }
+            /* Le titre principal du quiz */
+            h2 {
+                margin: 10px 0;
+                font-size: 2rem;
+                color: #333; /* Couleur du texte */
+            }
 
-        h2 {
-            margin: 10px 0;
-            font-size: 2rem;
-            color: #333;
-        }
+            /* Style de la question du quiz */
+            .question {
+                font-size: 1.2rem;
+                margin: 20px 0;
+                color: #555;
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
 
-        .question {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            color: #555;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+            /* Conteneur pour la carte du Canada */
+            .map-container {
+                position: relative;
+                margin: 20px 0;
+            }
 
-        .map-container {
-            position: relative;
-            margin: 20px 0;
-        }
+            /* Style de l'image de la carte */
+            .map-container img {
+                width: 100%;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
 
-        .map-container img {
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+            /* Champ de texte pour entrer la réponse */
+            input[type="text"] {
+                padding: 10px;
+                font-size: 1rem;
+                width: 80%;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                margin: 10px 0;
+            }
 
-        input[type="text"] {
-            padding: 10px;
-            font-size: 1rem;
-            width: 80%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
+            /* Le bouton pour soumettre la réponse */
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
 
-        button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+            /* Quand on survole le bouton, il change de couleur */
+            button:hover {
+                background-color: #45a049;
+            }
 
-        button:hover {
-            background-color: #45a049;
-        }
+            /* Message qui s'affiche après chaque réponse */
+            .message {
+                font-size: 1rem;
+                margin: 15px 0;
+            }
 
-        .message {
-            font-size: 1rem;
-            margin: 15px 0;
-        }
+            /* Affichage du score */
+            .score {
+                margin-top: 20px;
+                font-size: 1.2rem;
+                color: #333;
+            }
 
-        .score {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #333;
-        }
+            /* Affichage des cœurs qui représentent les vies restantes */
+            .hearts {
+                font-size: 1.5rem;
+                color: red;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                margin-bottom: 10px;
+            }
 
-.hearts {
-    font-size: 1.5rem;
-    color: red;
-    position: absolute; /* Positioning it absolutely within the container */
-    top: 10px; /* Adjust the distance from the top */
-    right: 10px; /* Adjust the distance from the right */
-    margin-bottom: 10px;
-}
+            /* Boutons qui s'affichent à la fin du quiz */
+            .end-buttons {
+                margin-top: 20px;
+            }
 
-        .end-buttons {
-            margin-top: 20px;
-        }
+            /* Style des boutons de fin */
+            .end-buttons button {
+                margin: 5px;
+            }
 
-        .end-buttons button {
-            margin: 5px;
-        }
-
-        .warning {
-            font-size: 1rem;
-            color: red;
-            margin-top: 10px;
-        }
-
-        
-    </style>
-</head>
-<body>
-
-    <div class="container">
+            /* Message d'avertissement */
+            .warning {
+                font-size: 1rem;
+                color: red;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Bouton maison pour revenir à la page d'accueil -->
             <div class="home-button">
-        <a href="index.html">
-            <img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30">
-        </a>
-    </div>
-         <div class="hearts" id="hearts">❤️❤️❤️</div>
-        <h2>Quiz de province et territoire</h2>
+                <a href="index.html">
+                    <img src="image/logo-home-website-5.jpg" alt="maison" width="30" height="30" />
+                </a>
+            </div>
 
+            <!-- Affichage des vies restantes sous forme de cœurs -->
+            <div class="hearts" id="hearts">❤️❤️❤️</div>
+            <h2>Quiz de province et territoire</h2>
 
+            <!-- Question à afficher -->
+            <p class="question" id="question">Question ici</p>
 
-        <p class="question" id="question">Question ici</p>
-        <div class="map-container">
-            <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada">
+            <!-- Carte à afficher pour chaque question -->
+            <div class="map-container">
+                <img src="https://www.funtrivia.com/qphotos/57/407657_0_o.jpg" alt="Carte du Canada" />
+            </div>
+
+            <!-- Champ pour que l'utilisateur entre sa réponse -->
+            <input type="text" id="answerInput" placeholder="Écrivez le nom de la province ici" />
+
+            <!-- Bouton pour soumettre la réponse -->
+            <button onclick="checkAnswer()">Soumettre</button>
+
+            <!-- Message d'indication (bonne réponse ou mauvaise réponse) -->
+            <div class="message" id="message"></div>
+
+            <!-- Affichage du score -->
+            <div class="score" id="score"></div>
+
+            <!-- Message d'avertissement pour entrer la réponse en majuscules -->
+            <div class="warning" id="warningMessage">Veuillez entrer votre réponse en MAJUSCULES.</div>
+
+            <!-- Boutons à la fin du quiz (recommencer ou aller à la page d'accueil) -->
+            <div class="end-buttons" id="endButtons" style="display: none;">
+                <button onclick="restartQuiz()">Recommencer le quiz</button>
+                <button onclick="goHome()">Retour à l'accueil</button>
+            </div>
         </div>
-        <input type="text" id="answerInput" placeholder="Écrivez le nom de la province ici">
-        <button onclick="checkAnswer()">Soumettre</button>
-        <div class="message" id="message"></div>
-        <div class="score" id="score"></div>
-        <div class="warning" id="warningMessage">Veuillez entrer votre réponse en MAJUSCULES.</div>
-        <div class="end-buttons" id="endButtons" style="display: none;">
-            <button onclick="restartQuiz()">Recommencer le quiz</button>
-            <button onclick="goHome()">Retour à l'accueil</button>
-        </div>
-    </div>
 
-    <script>
-        const provinces = [
-            { number: 1, name: "Colombie-Britannique", question: "Quelle province est désignée par le numéro 1 ?" },
-            { number: 2, name: "Alberta", question: "Quelle province est désignée par le numéro 2 ?" },
-            { number: 3, name: "Saskatchewan", question: "Quelle province est désignée par le numéro 3 ?" },
-            { number: 4, name: "Manitoba", question: "Quelle province est désignée par le numéro 4 ?" },
-            { number: 5, name: "Ontario", question: "Quelle province est désignée par le numéro 5 ?" },
-            { number: 6, name: "Québec", question: "Quelle province est désignée par le numéro 6 ?" },
-            { number: 7, name: "Nouvelle-Écosse", question: "Quelle province est désignée par le numéro 7 ?" },
-            { number: 8, name: "Nouveau-Brunswick", question: "Quelle province est désignée par le numéro 8 ?" },
-            { number: 9, name: "Île-du-Prince-Édouard", question: "Quelle province est désignée par le numéro 9 ?" },
-            { number: 10, name: "Terre-Neuve-et-Labrador", question: "Quelle province est désignée par le numéro 10 ?" },
-            { number: 11, name: "Territoires du Nord-Ouest", question: "Quelle province est désignée par le numéro 11 ?" },
-            { number: 12, name: "Yukon", question: "Quelle province est désignée par le numéro 12 ?" },
-            { number: 13, name: "Nunavut", question: "Quelle province est désignée par le numéro 13 ?" }
-        ];
+        <script>
+            /* Tableau des provinces avec leur numéro, leur nom et leur question */
+            const provinces = [
+                { number: 1, name: "Colombie-Britannique", question: "Quelle province est désignée par le numéro 1 ?" },
+                { number: 2, name: "Alberta", question: "Quelle province est désignée par le numéro 2 ?" },
+                { number: 3, name: "Saskatchewan", question: "Quelle province est désignée par le numéro 3 ?" },
+                { number: 4, name: "Manitoba", question: "Quelle province est désignée par le numéro 4 ?" },
+                { number: 5, name: "Ontario", question: "Quelle province est désignée par le numéro 5 ?" },
+                { number: 6, name: "Québec", question: "Quelle province est désignée par le numéro 6 ?" },
+                { number: 7, name: "Nouvelle-Écosse", question: "Quelle province est désignée par le numéro 7 ?" },
+                { number: 8, name: "Nouveau-Brunswick", question: "Quelle province est désignée par le numéro 8 ?" },
+                { number: 9, name: "Île-du-Prince-Édouard", question: "Quelle province est désignée par le numéro 9 ?" },
+                { number: 10, name: "Terre-Neuve-et-Labrador", question: "Quelle province est désignée par le numéro 10 ?" },
+                { number: 11, name: "Territoires du Nord-Ouest", question: "Quelle province est désignée par le numéro 11 ?" },
+                { number: 12, name: "Yukon", question: "Quelle province est désignée par le numéro 12 ?" },
+                { number: 13, name: "Nunavut", question: "Quelle province est désignée par le numéro 13 ?" },
+            ];
 
-        let currentProvinceIndex = 0;
-        let score = 0;
-        let hearts = 3;
+            let currentProvinceIndex = 0;
+            let score = 0;
+            let hearts = 3; /* Le nombre de vies (cœurs) du joueur */
 
-        function loadProvince() {
-            const province = provinces[currentProvinceIndex];
-            document.getElementById("question").innerText = province.question;
-            document.getElementById("message").innerText = "";
-            document.getElementById("answerInput").value = "";
-            updateHearts();
-            updateScore();
-        }
-
-        function checkAnswer() {
-            const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();
-            const correctAnswer = provinces[currentProvinceIndex].name.toUpperCase();
-
-            if (userAnswer === correctAnswer) {
-                document.getElementById("message").innerText = "Bonne réponse!";
-                document.getElementById("message").style.color = "green";
-                score++;
-            } else {
-                hearts--;
+            /* Fonction pour charger la question et mettre à jour l'interface */
+            function loadProvince() {
+                const province = provinces[currentProvinceIndex];
+                document.getElementById("question").innerText = province.question;
+                document.getElementById("message").innerText = "";
+                document.getElementById("answerInput").value = "";
                 updateHearts();
+                updateScore();
+            }
 
-                if (hearts === 0) {
-                    endQuiz();
-                    return;
+            /* Fonction pour vérifier la réponse de l'utilisateur */
+            function checkAnswer() {
+                const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();
+                const correctAnswer = provinces[currentProvinceIndex].name.toUpperCase();
+
+                if (userAnswer === correctAnswer) {
+                    document.getElementById("message").innerText = "Bonne réponse!";
+                    document.getElementById("message").style.color = "green";
+                    score++; /* Augmente le score si la réponse est correcte */
+                } else {
+                    hearts--; /* On enlève une vie si la réponse est incorrecte */
+                    updateHearts();
+
+                    if (hearts === 0) {
+                        endQuiz(); /* Si le joueur n'a plus de vies, on termine le quiz */
+                        return;
+                    }
+
+                    document.getElementById("message").innerText = `Incorrect! La bonne réponse était ${correctAnswer}.`;
+                    document.getElementById("message").style.color = "red"; /* Le texte devient rouge en cas de mauvaise réponse */
                 }
 
-                document.getElementById("message").innerText = `Incorrect! La bonne réponse était ${correctAnswer}.`;
-                document.getElementById("message").style.color = "red";
+                currentProvinceIndex++;
+                if (currentProvinceIndex < provinces.length) {
+                    setTimeout(loadProvince, 1000);
+                } else {
+                    endQuiz();
+                }
             }
 
-            currentProvinceIndex++;
-            if (currentProvinceIndex < provinces.length) {
-                setTimeout(loadProvince, 1000);
-            } else {
-                endQuiz();
+            /* Fonction pour mettre à jour l'affichage des cœurs (vies restantes) */
+            function updateHearts() {
+                const heartsDisplay = "❤️".repeat(hearts);
+                document.getElementById("hearts").innerText = heartsDisplay;
             }
-        }
 
-        function updateHearts() {
-            const heartsDisplay = "❤️".repeat(hearts);
-            document.getElementById("hearts").innerText = heartsDisplay;
-        }
+            /* Fonction pour mettre à jour le score */
+            function updateScore() {
+                document.getElementById("score").innerText = `Score: ${score}`;
+            }
 
-        function updateScore() {
-            document.getElementById("score").innerText = `Score: ${score} / ${provinces.length}`;
-        }
+            /* Fonction pour terminer le quiz */
+            function endQuiz() {
+                document.getElementById("endButtons").style.display = "block";
+                document.getElementById("question").innerText = "Fin du quiz!";
+                document.getElementById("message").innerText = "";
+            }
 
-        function endQuiz() {
-            document.getElementById("question").innerText = "Quiz terminé!";
-            document.getElementById("message").innerText = `Vous avez obtenu ${score} sur ${provinces.length}.`;
-            document.getElementById("answerInput").style.display = "none";
-            document.querySelector("button").style.display = "none";
-            document.getElementById("endButtons").style.display = "block";
-        }
+            /* Fonction pour recommencer le quiz */
+            function restartQuiz() {
+                currentProvinceIndex = 0;
+                score = 0;
+                hearts = 3;
+                loadProvince();
+                document.getElementById("endButtons").style.display = "none";
+            }
 
-     function restartQuiz() {
-    currentProvinceIndex = 0;
-    score = 0;
-    hearts = 3;
-    document.getElementById("answerInput").style.display = "block";
-    document.querySelector("button").style.display = "block";
-    document.getElementById("endButtons").style.display = "none";
-    
-    // Re-load province and ensure everything is centered
-    loadProvince();
-    
-    // Reset the input field and button layout
-    document.getElementById("answerInput").style.width = '80%';  // Ensure the width stays consistent
-    document.querySelector("button").style.margin = '10px 0';  // Adjust margins if necessary
-}
+            /* Fonction pour retourner à la page d'accueil */
+            function goHome() {
+                window.location.href = "index.html";
+            }
 
-        function goHome() {
-            window.location.href = "index.html";
-        }
-
-        window.onload = function () {
             loadProvince();
-        };
-
-        document.getElementById("answerInput").addEventListener("input", function() {
-            this.value = this.value.toUpperCase();
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
-
