@@ -1,17 +1,17 @@
 à/* Le style pour le corps de la page */
 body {
-    background-image: url("image/pixelcut-export.jpeg"); /* On met une image de fond */
+    background-image: url("image/pixelcut-export.jpeg"); 
     background-repeat: no-repeat; /* L'image ne se répète pas */
     background-size: cover; /* L'image couvre toute la page */
-    background-attachment: fixed; /* L'image reste fixe quand on fait défiler la page */
-    margin: 0; /* On enlève les marges autour de la page */
-    padding: 0; /* On enlève les espacements internes de la page */
-    display: flex; /* On utilise flexbox pour centrer tout le contenu */
-    justify-content: center; /* On centre tout horizontalement */
-    align-items: center; /* On centre tout verticalement */
-    height: 100px; /* On donne une hauteur de 100px à la page */
-    background-color: #f2f2f2; /* Si l'image de fond ne charge pas, la couleur de fond sera gris clair */
-    font-family: 'Brush Script MT', cursive; /* La police du texte de la page */
+    background-attachment: fixed; 
+    margin: 0; /
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+    background-color: #f2f2f2; 
+    font-family: 'Brush Script MT', cursive; 
 }
 
 /* Style du bloc contenant le quiz */
